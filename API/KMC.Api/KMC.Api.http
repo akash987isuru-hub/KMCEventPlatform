@@ -1,0 +1,123 @@
+@KMC_Api_HostAddress = https://localhost:7172
+@OrganizerToken = paste-organizer-jwt-here
+@ParticipantToken = paste-participant-jwt-here
+@EventId = 1
+@RegistrationId = 1
+
+### Health
+GET {{KMC_Api_HostAddress}}/health
+
+### Scalar UI
+# Open in a browser: {{KMC_Api_HostAddress}}/scalar/v1
+
+### Register Organizer
+POST {{KMC_Api_HostAddress}}/api/Auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Kandy Event Organizer",
+  "email": "organizer@kmc.lk",
+  "password": "Organizer2026A",
+  "role": "Organizer"
+}
+
+### Register Participant
+POST {{KMC_Api_HostAddress}}/api/Auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Kandy Participant",
+  "email": "participant@kmc.lk",
+  "password": "Participant2026A",
+  "role": "Participant"
+}
+
+### Login Organizer
+POST {{KMC_Api_HostAddress}}/api/Auth/login
+Content-Type: application/json
+
+{
+  "email": "organizer@kmc.lk",
+  "password": "Organizer2026A"
+}
+
+### Login Participant
+POST {{KMC_Api_HostAddress}}/api/Auth/login
+Content-Type: application/json
+
+{
+  "email": "participant@kmc.lk",
+  "password": "Participant2026A"
+}
+
+### Create Published Event
+POST {{KMC_Api_HostAddress}}/api/Events
+Authorization: Bearer {{OrganizerToken}}
+Content-Type: application/json
+
+{
+  "title": "Kandy Community Innovation Day",
+  "description": "A city event connecting residents, students and local organizations.",
+  "eventType": "Community",
+  "eventDate": "2026-12-15",
+  "startTime": "09:00:00",
+  "endTime": "16:00:00",
+  "venue": "Kandy Municipal Council Hall",
+  "location": "Kandy",
+  "capacity": 250,
+  "status": "Published"
+}
+
+### Public Search
+GET {{KMC_Api_HostAddress}}/api/Events?eventType=Community&location=Kandy
+Accept: application/json
+
+### Public Event Details
+GET {{KMC_Api_HostAddress}}/api/Events/{{EventId}}
+Accept: application/json
+
+### Organizer Events
+GET {{KMC_Api_HostAddress}}/api/Events/my-events
+Authorization: Bearer {{OrganizerToken}}
+
+### Participant Registers
+POST {{KMC_Api_HostAddress}}/api/Registrations/events/{{EventId}}
+Authorization: Bearer {{ParticipantToken}}
+
+### Participant Registrations
+GET {{KMC_Api_HostAddress}}/api/Registrations/my-registrations
+Authorization: Bearer {{ParticipantToken}}
+
+### Organizer Views Participants
+GET {{KMC_Api_HostAddress}}/api/Registrations/events/{{EventId}}/participants
+Authorization: Bearer {{OrganizerToken}}
+
+### Participant Cancels Registration
+DELETE {{KMC_Api_HostAddress}}/api/Registrations/{{RegistrationId}}
+Authorization: Bearer {{ParticipantToken}}
+
+### Partner organizer synchronizes an event
+POST {{KMC_Api_HostAddress}}/api/PartnerEvents/sync
+X-Partner-Api-Key: organizer-demo-secret-key
+Content-Type: application/json
+
+{
+  "externalEventCode": "ORG-DEMO-001",
+  "sourceEventId": 1,
+  "sourceSystem": "Organizer.Api",
+  "title": "Kandy Heritage Music Evening",
+  "description": "A partner event synchronized from an organizer website.",
+  "eventType": "Cultural",
+  "eventDate": "2026-11-15",
+  "startTime": "17:00:00",
+  "endTime": "21:00:00",
+  "venue": "Kandy Heritage Centre",
+  "location": "Kandy",
+  "organizerName": "Sparkling Events Kandy",
+  "organizerEventUrl": "https://localhost:7193/Events/Details?id=1",
+  "isPublished": true
+}
+
+### Public partner events
+GET {{KMC_Api_HostAddress}}/api/PartnerEvents
+Accept: application/json
