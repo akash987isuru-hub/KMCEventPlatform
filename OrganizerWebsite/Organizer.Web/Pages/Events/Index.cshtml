@@ -1,0 +1,16 @@
+@page
+@model Organizer.Web.Pages.Events.IndexModel
+@{ ViewData["Title"] = "Events"; }
+<section class="page-intro events-intro"><div class="container intro-grid"><div><span class="kicker">Sparkling calendar</span><h1>Experiences designed in Kandy.</h1></div><p>Availability is shared live with KMC Web. A purchase on either website updates the same ticket inventory.</p></div></section>
+<div class="container section-wrap">
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage)) { <div class="soft-alert">@Model.ErrorMessage</div> }
+else if (Model.Events.Count == 0) { <div class="paper-empty">There are no published events at the moment.</div> }
+else {
+<div class="event-list">@foreach (var item in Model.Events) {
+<article class="event-row-card @(item.HasEnded ? "event-ended" : "")">
+<div class="event-row-date"><strong>@item.EventDate.ToString("dd")</strong><span>@item.EventDate.ToString("MMM")</span><small>@item.EventDate.ToString("yyyy")</small></div>
+<div class="event-row-copy"><div class="d-flex gap-2 flex-wrap"><span class="event-tag">@item.EventType</span>@if(item.HasEnded){<span class="status-chip ended">Ended</span>}else if(item.IsSoldOut){<span class="status-chip sold">Sold Out</span>}else{<span class="status-chip live">Booking Open</span>}</div><h2>@item.Title</h2><p>@item.Description</p><div class="event-inline-facts"><span>@item.EventDate.ToString("dd MMM")@(item.EndDate.Date != item.EventDate.Date ? $" – {item.EndDate:dd MMM yyyy}" : "")</span><span>@item.StartTime.ToString(@"hh\:mm")–@item.EndTime.ToString(@"hh\:mm")</span><span>@item.Venue</span><span>Hosted by @item.OrganizerName</span></div></div>
+<div class="event-row-booking"><span>@(item.IsSoldOut ? "status" : "from")</span><strong>@(item.IsSoldOut ? "SOLD OUT" : $"LKR {item.MinimumTicketPrice:N0}")</strong><small>@item.AvailableCount ticket(s) left</small><a asp-page="/Events/Details" asp-route-id="@item.Id" class="btn-plum">Tickets &amp; details</a></div>
+</article> }
+</div> }
+</div>

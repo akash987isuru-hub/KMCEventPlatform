@@ -1,0 +1,105 @@
+@model Organizer.Web.Models.EventFormViewModel
+
+<div asp-validation-summary="ModelOnly" class="soft-alert error mb-4"></div>
+
+<section class="form-paper">
+    <span class="form-step">01 · Event story</span>
+    <div class="row g-3">
+        <div class="col-12">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" placeholder="A clear, memorable event title" />
+            <span asp-validation-for="Title"></span>
+        </div>
+        <div class="col-12">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control" rows="5" placeholder="Write the description in your own voice: who it is for, what happens, and what guests should expect."></textarea>
+            <span asp-validation-for="Description"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="EventType"></label>
+            <input asp-for="EventType" class="form-control" placeholder="Workshop, music, heritage..." />
+            <span asp-validation-for="EventType"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="EventDate"></label>
+            <input asp-for="EventDate" type="date" class="form-control" />
+            <span asp-validation-for="EventDate"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="StartTime"></label>
+            <input asp-for="StartTime" type="time" class="form-control" />
+            <span asp-validation-for="StartTime"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="EndDate"></label>
+            <input asp-for="EndDate" type="date" class="form-control" />
+            <span asp-validation-for="EndDate"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="EndTime"></label>
+            <input asp-for="EndTime" type="time" class="form-control" />
+            <span asp-validation-for="EndTime"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Venue"></label>
+            <input asp-for="Venue" class="form-control" />
+            <span asp-validation-for="Venue"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Location"></label>
+            <input asp-for="Location" class="form-control" />
+            <span asp-validation-for="Location"></span>
+        </div>
+        <div class="col-12">
+            <label asp-for="OrganizerName"></label>
+            <input asp-for="OrganizerName" class="form-control" />
+            <span asp-validation-for="OrganizerName"></span>
+        </div>
+    </div>
+</section>
+
+<section class="form-paper">
+    <div class="section-title-row compact">
+        <div><span class="form-step">02 · Ticket details</span><h2>Set prices and capacities</h2></div>
+        <small>These are shared with KMC Web.</small>
+    </div>
+    <span asp-validation-for="TicketTiers"></span>
+    <div class="ticket-editor-grid">
+        @for (var index = 0; index < Model.TicketTiers.Count; index++)
+        {
+            <article class="ticket-editor-card">
+                <input asp-for="TicketTiers[index].Id" type="hidden" />
+                <input asp-for="TicketTiers[index].SortOrder" type="hidden" />
+                <span class="ticket-number">Ticket @(index + 1)</span>
+                <label asp-for="TicketTiers[index].Name"></label>
+                <input asp-for="TicketTiers[index].Name" class="form-control" />
+                <span asp-validation-for="TicketTiers[index].Name"></span>
+
+                <label asp-for="TicketTiers[index].Description"></label>
+                <textarea asp-for="TicketTiers[index].Description" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="TicketTiers[index].Description"></span>
+
+                <div class="row g-2">
+                    <div class="col-6">
+                        <label asp-for="TicketTiers[index].Price"></label>
+                        <input asp-for="TicketTiers[index].Price" class="form-control" />
+                        <span asp-validation-for="TicketTiers[index].Price"></span>
+                    </div>
+                    <div class="col-6">
+                        <label asp-for="TicketTiers[index].Capacity"></label>
+                        <input asp-for="TicketTiers[index].Capacity" class="form-control" />
+                        <span asp-validation-for="TicketTiers[index].Capacity"></span>
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+</section>
+
+<section class="publish-paper">
+    <div class="form-check">
+        <input asp-for="IsPublished" class="form-check-input" />
+        <label asp-for="IsPublished" class="form-check-label"></label>
+    </div>
+    <p>When selected, event information, ticket prices and live sold counts are synchronized with KMC Web.</p>
+</section>

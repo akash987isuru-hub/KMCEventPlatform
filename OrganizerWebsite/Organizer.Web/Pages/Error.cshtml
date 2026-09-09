@@ -1,0 +1,26 @@
+@page
+@model ErrorModel
+@{
+    ViewData["Title"] = "Something went wrong";
+}
+<section class="page-intro studio-intro">
+    <div class="container intro-grid">
+        <div><span class="kicker">Sparkling Events Kandy</span><h1>We could not complete that request.</h1></div>
+        <p>Check that Organizer.Api is running and try again. The event and ticket services may need a moment while database migrations are applied.</p>
+    </div>
+</section>
+<section class="section-wrap">
+    <div class="container">
+        <div class="soft-alert error">
+            Please return to the events page or the event desk and retry the action.
+            @if (Model.ShowRequestId)
+            {
+                <div><strong>Request ID:</strong> <code>@Model.RequestId</code></div>
+            }
+        </div>
+        <div class="hero-actions">
+            <a asp-page="/Events/Index" class="btn-coral">Browse events</a>
+            <a asp-page="/Studio/Index" class="btn-outline-ink">Open event desk</a>
+        </div>
+    </div>
+</section>

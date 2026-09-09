@@ -1,0 +1,85 @@
+@page
+@model Organizer.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<section class="home-hero">
+    <div class="container hero-layout">
+        <div class="hero-copy-block">
+            <span class="hand-note">Curated ticketed experiences in Kandy</span>
+            <h1>Events designed to feel effortless.</h1>
+            <p class="hero-lead">
+                Discover music nights, creative workshops, cultural programmes and community experiences
+                with transparent pricing and live ticket availability.
+            </p>
+            <div class="hero-actions">
+                <a asp-page="/Events/Index" class="btn-coral">Browse upcoming events</a>
+                <a asp-page="/Studio/Index" class="text-link">Open the event desk →</a>
+            </div>
+            <div class="personal-signoff platform-signoff">
+                <span class="signature">Sparkling Events</span>
+                <small>Plan clearly · Book securely · Enjoy Kandy</small>
+            </div>
+        </div>
+        <div class="hero-collage" aria-label="Sparkling Events Kandy platform highlights">
+            <div class="collage-card collage-main">
+                <span>Created for</span><strong>Kandy</strong><small>Music · culture · workshops · celebrations</small>
+            </div>
+            <div class="collage-card collage-note">
+                <strong>Live stock</strong><span>Shared ticket availability across the organizer and KMC platforms</span>
+            </div>
+            <div class="collage-card collage-flower">✦</div>
+        </div>
+    </div>
+</section>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+    <div class="container pt-4"><div class="soft-alert">@Model.ErrorMessage</div></div>
+}
+
+<section class="numbers-strip">
+    <div class="container numbers-grid">
+        <div><strong>@Model.EventCount</strong><span>events created</span></div>
+        <div><strong>@Model.TicketCount</strong><span>tickets confirmed</span></div>
+        <div><strong>@Model.KmcPublishedCount</strong><span>events shared with KMC</span></div>
+        <div><strong>Live</strong><span>synchronized ticket inventory</span></div>
+    </div>
+</section>
+
+<section class="section-wrap">
+    <div class="container">
+        <div class="section-title-row">
+            <div>
+                <span class="kicker">Coming up</span>
+                <h2>Find your next Kandy experience.</h2>
+            </div>
+            <a asp-page="/Events/Index" class="text-link">See the full calendar →</a>
+        </div>
+
+        @if (Model.FeaturedEvents.Count == 0)
+        {
+            <div class="paper-empty">New dates are being planned. Check back soon.</div>
+        }
+        else
+        {
+            <div class="editorial-grid">
+                @foreach (var item in Model.FeaturedEvents)
+                {
+                    <article class="editorial-card">
+                        <div class="date-stamp"><strong>@item.EventDate.ToString("dd")</strong><span>@item.EventDate.ToString("MMM")</span></div>
+                        <span class="event-tag">@item.EventType</span>
+                        <h3>@item.Title</h3>
+                        <p>@item.Description</p>
+                        <div class="event-facts">
+                            <span>@item.Venue</span>
+                            <span>From LKR @item.MinimumTicketPrice.ToString("N0")</span>
+                        </div>
+                        <a asp-page="/Events/Details" asp-route-id="@item.Id" class="card-link">View event &amp; tickets →</a>
+                    </article>
+                }
+            </div>
+        }
+    </div>
+</section>

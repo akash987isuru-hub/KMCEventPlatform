@@ -1,0 +1,60 @@
+@page
+@model Organizer.Web.Pages.Bookings.TicketModel
+@{
+    ViewData["Title"] = "Your Ticket";
+}
+
+<section class="ticket-confirmation-wrap">
+    <div class="container">
+        @if (TempData["SuccessMessage"] is string success) { <div class="soft-alert success">@success</div> }
+        @if (TempData["WarningMessage"] is string warning) { <div class="soft-alert error">@warning</div> }
+        <div class="success-mark">✓</div>
+        <span class="kicker">Payment approved</span>
+        <h1>You’re on the guest list.</h1>
+        <p>We have saved your booking. Keep this reference for the event entrance.</p>
+
+        <article class="print-ticket">
+            <div class="ticket-brand">
+                <span class="brand-monogram">S</span>
+                <div><strong>Sparkling Events Kandy</strong><small>Digital admission ticket</small></div>
+            </div>
+            <div class="ticket-event-copy">
+                <span>
+                    @Model.Booking.EventDate.ToString("dddd, dd MMMM yyyy")
+                    @if (Model.Booking.EndDate.Date != Model.Booking.EventDate.Date)
+                    {
+                        <text> – @Model.Booking.EndDate.ToString("dddd, dd MMMM yyyy")</text>
+                    }
+                </span>
+                <h2>@Model.Booking.EventTitle</h2>
+                <p>@Model.Booking.Venue · @Model.Booking.StartTime.ToString(@"hh\:mm") – @Model.Booking.EndTime.ToString(@"hh\:mm")</p>
+            </div>
+            <div class="ticket-details-grid">
+                <div><span>Guest</span><strong>@Model.Booking.CustomerName</strong></div>
+                <div><span>Ticket</span><strong>@Model.Booking.TicketTierName × @Model.Booking.Quantity</strong></div>
+                <div><span>Reference</span><strong>@Model.Booking.BookingReference</strong></div>
+                <div><span>Paid</span><strong>LKR @Model.Booking.TotalAmount.ToString("N2")</strong></div>
+                <div><span>Payment</span><strong>@Model.Booking.CardDisplay</strong></div>
+                <div><span>Booked via</span><strong>@Model.Booking.BookingSource</strong></div>
+            </div>
+            <div class="ticket-barcode">@Model.Booking.BookingReference</div>
+        </article>
+
+        <div class="confirmation-actions">
+            <button type="button" onclick="window.print()" class="btn-plum">Print ticket</button>
+            @if (Model.Booking.BookingStatus == "Confirmed")
+            {
+                <a asp-page-handler="Download"
+                   asp-route-reference="@Model.Booking.BookingReference"
+                   class="btn-outline-ink">Download PDF</a>
+            }
+            @if (Model.Booking.BookingStatus == "Confirmed")
+            {
+                <form method="post" asp-page-handler="Cancel" asp-route-reference="@Model.Booking.BookingReference" onsubmit="return confirm('Cancel this booking and refund the demo payment?');">
+                    <button type="submit" class="btn-outline-ink">Cancel booking</button>
+                </form>
+            }
+            <a asp-page="/Events/Index" class="text-link">Back to events →</a>
+        </div>
+    </div>
+</section>

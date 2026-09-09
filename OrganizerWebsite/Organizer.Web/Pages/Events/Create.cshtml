@@ -1,0 +1,18 @@
+@page
+@model Organizer.Web.Pages.Events.CreateModel
+@{
+    ViewData["Title"] = "Create Event";
+}
+<section class="page-intro studio-intro">
+    <div class="container"><span class="kicker">Event desk</span><h1>Plan a new event.</h1><p>Write it as you would explain it to a guest. Ticket stock will stay synchronized across both websites.</p></div>
+</section>
+<div class="container form-page-wrap">
+    <form method="post">
+        <partial name="_EventForm" for="Input" />
+        <div class="form-actions">
+            <a asp-page="/Studio/Index" class="btn-outline-ink">Cancel</a>
+            <button type="submit" class="btn-coral">Save event &amp; sync</button>
+        </div>
+    </form>
+</div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

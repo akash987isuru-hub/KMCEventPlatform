@@ -1,0 +1,28 @@
+@page
+@model Organizer.Web.Pages.Studio.BookingsModel
+@{
+    ViewData["Title"] = "Bookings";
+}
+<section class="page-intro studio-intro"><div class="container intro-grid"><div><span class="kicker">Event desk</span><h1>Guest list &amp; payments.</h1></div><a asp-page="/Studio/Index" class="btn-outline-ink">Back to event desk</a></div></section>
+<div class="container studio-wrap">
+    <div class="studio-metrics two"><article><span>Confirmed tickets</span><strong>@Model.TicketCount</strong></article><article><span>Demo revenue</span><strong>LKR @Model.Revenue.ToString("N2")</strong></article></div>
+    <div class="booking-table-wrap">
+        <table class="booking-table">
+            <thead><tr><th>Date</th><th>Reference</th><th>Guest</th><th>Contact</th><th>Event / tier</th><th>Source</th><th>Payment</th></tr></thead>
+            <tbody>
+            @foreach (var booking in Model.Bookings)
+            {
+                <tr>
+                    <td>@booking.CreatedAt.ToLocalTime().ToString("dd MMM HH:mm")</td>
+                    <td>@booking.BookingReference</td>
+                    <td>@booking.CustomerName</td>
+                    <td>@booking.CustomerEmail<br /><small>@booking.CustomerPhone</small></td>
+                    <td>@booking.EventTitle<br /><small>@booking.TicketTierName × @booking.Quantity</small></td>
+                    <td>@booking.BookingSource</td>
+                    <td>@booking.PaymentStatus<br /><small>@booking.CardDisplay · LKR @booking.TotalAmount.ToString("N2")</small></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

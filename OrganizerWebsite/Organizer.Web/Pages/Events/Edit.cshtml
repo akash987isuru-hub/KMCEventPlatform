@@ -1,0 +1,18 @@
+@page
+@model Organizer.Web.Pages.Events.EditModel
+@{
+    ViewData["Title"] = "Edit Event";
+}
+<section class="page-intro studio-intro">
+    <div class="container"><span class="kicker">Event desk</span><h1>Edit event details.</h1><p>Changes to prices, capacities and event information are sent to KMC automatically.</p></div>
+</section>
+<div class="container form-page-wrap">
+    <form method="post">
+        <partial name="_EventForm" for="Input" />
+        <div class="form-actions">
+            <a asp-page="/Studio/Index" class="btn-outline-ink">Cancel</a>
+            <button type="submit" class="btn-coral">Update event</button>
+        </div>
+    </form>
+</div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

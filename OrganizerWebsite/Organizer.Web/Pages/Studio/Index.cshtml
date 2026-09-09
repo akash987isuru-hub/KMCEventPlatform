@@ -1,0 +1,92 @@
+@page
+@model Organizer.Web.Pages.Studio.IndexModel
+@{
+    ViewData["Title"] = "Studio Desk";
+}
+<section class="page-intro studio-intro">
+    <div class="container intro-grid">
+        <div><span class="kicker">Private event management view · demo</span><h1>Sparkling Events Kandy event desk.</h1></div>
+        <div class="studio-actions"><a asp-page="/Events/Create" class="btn-coral">Add a new event</a><a asp-page="/Studio/Bookings" class="btn-outline-ink">View all bookings</a></div>
+    </div>
+</section>
+
+<div class="container studio-wrap">
+    @if (TempData["SuccessMessage"] is string success)
+    { <div class="soft-alert success">@success</div> }
+    @if (TempData["WarningMessage"] is string warning)
+    { <div class="soft-alert">@warning</div> }
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    { <div class="soft-alert error">@Model.ErrorMessage</div> }
+
+    <div class="studio-metrics">
+        <article><span>Events</span><strong>@Model.Events.Count</strong><small>all drafts and published dates</small></article>
+        <article><span>Tickets sold</span><strong>@Model.TicketsSold</strong><small>from both websites</small></article>
+        <article><span>Demo revenue</span><strong>LKR @Model.Revenue.ToString("N0")</strong><small>approved payments</small></article>
+    </div>
+
+    <div class="studio-section-heading"><div><span class="kicker">Event management</span><h2>Your calendar</h2></div></div>
+    <div class="studio-event-list">
+        @foreach (var item in Model.Events)
+        {
+            <article class="studio-event-card">
+                <div class="studio-date"><strong>@item.EventDate.ToString("dd")</strong><span>@item.EventDate.ToString("MMM")</span></div>
+                <div class="studio-event-copy">
+                    <div class="studio-badges">
+                        <span>@item.EventType</span>
+                        @if (item.HasEnded)
+                        {
+                            <span class="sync-warn">Ended</span>
+                        }
+                        else if (item.IsSoldOut)
+                        {
+                            <span class="sync-warn">Sold Out</span>
+                        }
+                        else
+                        {
+                            <span class="@(item.IsPublishedToKmc ? "sync-good" : "sync-warn")">@(item.IsPublishedToKmc ? "KMC synced" : "Sync pending")</span>
+                        }
+                    </div>
+                    <h3>@item.Title</h3>
+                    <p>@item.EventDate.ToString("dd MMM yyyy")@(item.EndDate.Date != item.EventDate.Date ? $" – {item.EndDate:dd MMM yyyy}" : "") · @item.SoldCount / @item.TotalCapacity tickets sold · from LKR @item.MinimumTicketPrice.ToString("N0")</p>
+                    @if (!string.IsNullOrWhiteSpace(item.KmcSyncError)) { <small class="sync-message">@item.KmcSyncError</small> }
+                </div>
+                <div class="studio-card-actions">
+                    <a asp-page="/Events/Details" asp-route-id="@item.Id">Public view</a>
+                    <a asp-page="/Events/Edit" asp-route-id="@item.Id">Edit</a>
+                    @if (!item.IsPublishedToKmc && item.IsPublished)
+                    {
+                        <form method="post" asp-page-handler="Publish" asp-route-id="@item.Id"><button type="submit">Retry sync</button></form>
+                    }
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@item.Id" onsubmit="return confirm('Delete this event and its bookings?');"><button type="submit" class="danger-link">Delete</button></form>
+                </div>
+            </article>
+        }
+    </div>
+
+    <div class="studio-section-heading mt-5"><div><span class="kicker">Latest guests</span><h2>Recent bookings</h2></div><a asp-page="/Studio/Bookings" class="text-link">Full guest list →</a></div>
+    <div class="booking-table-wrap">
+        <table class="booking-table">
+            <thead><tr><th>Reference</th><th>Guest</th><th>Event</th><th>Tickets</th><th>Source</th><th>Paid</th><th>Status</th></tr></thead>
+            <tbody>
+            @foreach (var booking in Model.RecentBookings)
+            {
+                var isCanceled =
+                    string.Equals(booking.BookingStatus, "Cancelled", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(booking.BookingStatus, "Canceled", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(booking.PaymentStatus, "Refunded", StringComparison.OrdinalIgnoreCase);
+                var displayStatus = isCanceled ? "Canceled" : "Approved";
+
+                <tr>
+                    <td>@booking.BookingReference</td>
+                    <td>@booking.CustomerName<br /><small>@booking.CustomerEmail</small></td>
+                    <td>@booking.EventTitle</td>
+                    <td>@booking.TicketTierName × @booking.Quantity</td>
+                    <td>@booking.BookingSource</td>
+                    <td>LKR @booking.TotalAmount.ToString("N2")</td>
+                    <td><span class="booking-status-badge @(isCanceled ? "canceled" : "approved")">@displayStatus</span></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
