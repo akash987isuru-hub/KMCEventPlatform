@@ -1,0 +1,28 @@
+@OrganizerApi = https://localhost:7225
+
+### Create an organizer event (automatically syncs to KMC.Api)
+POST {{OrganizerApi}}/api/Events
+Content-Type: application/json
+
+{
+  "title": "Kandy Heritage Music Evening",
+  "description": "A cultural music evening organized by Sparkling Events Kandy.",
+  "eventType": "Cultural",
+  "eventDate": "2026-11-15",
+  "startTime": "17:00:00",
+  "endTime": "21:00:00",
+  "venue": "Kandy Heritage Centre",
+  "location": "Kandy",
+  "organizerName": "Sparkling Events Kandy",
+  "isPublished": true
+}
+
+### Get all organizer events
+GET {{OrganizerApi}}/api/Events
+Accept: application/json
+
+### Retry KMC synchronization
+POST {{OrganizerApi}}/api/Events/1/publish-to-kmc
+
+### Delete an organizer event
+DELETE {{OrganizerApi}}/api/Events/1
