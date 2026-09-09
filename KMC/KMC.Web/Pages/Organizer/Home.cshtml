@@ -1,0 +1,240 @@
+@page
+@model KMC.Web.Pages.Organizer.HomeModel
+
+@{
+    ViewData["Title"] = "Organizer Home";
+
+    var displayName = User.Identity?.Name ?? "Organizer";
+    var upcomingEvents = Model.Events
+        .Where(eventItem =>
+            eventItem.EventDate.Date.Add(eventItem.StartTime) >= DateTime.Now &&
+            string.Equals(eventItem.Status, "Published", StringComparison.OrdinalIgnoreCase))
+        .OrderBy(eventItem => eventItem.EventDate)
+        .ThenBy(eventItem => eventItem.StartTime)
+        .Take(3)
+        .ToList();
+
+    var nextEvent = upcomingEvents.FirstOrDefault();
+    var totalCapacity = Model.Events.Sum(eventItem => eventItem.Capacity);
+    var occupancyRate = totalCapacity > 0
+        ? Math.Round((decimal)Model.TotalRegistrations / totalCapacity * 100, 0)
+        : 0;
+}
+
+<section class="role-home-hero organizer-role-home">
+    <div class="role-home-orb role-home-orb-one" aria-hidden="true"></div>
+    <div class="role-home-orb role-home-orb-two" aria-hidden="true"></div>
+
+    <div class="container position-relative">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-7">
+                <span class="eyebrow-pill">
+                    <span class="eyebrow-dot"></span>
+                    Organizer Home
+                </span>
+
+                <h1>
+                    Welcome, @displayName.<br />
+                    <span>Turn ideas into well-managed city experiences.</span>
+                </h1>
+
+                <p class="role-home-lead">
+                    Plan professional events, configure ticket categories, manage capacity,
+                    and follow public user activity through one secure organizer service.
+                </p>
+
+                <div class="role-home-actions">
+                    <a asp-page="/Organizer/Index"
+                       class="btn btn-kmc-gold btn-lg">
+                        Open Workspace
+                    </a>
+                    <a asp-page="/Organizer/Create"
+                       class="btn btn-hero-outline btn-lg">
+                        Create New Event
+                    </a>
+                </div>
+
+                <div class="role-home-trust">
+                    <span><strong>01</strong> Publish trusted event information</span>
+                    <span><strong>02</strong> Control ticket prices and availability</span>
+                    <span><strong>03</strong> Review registrations and revenue records</span>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <aside class="role-command-card reveal-on-scroll">
+                    <div class="command-card-head">
+                        <div>
+                            <span>Organizer overview</span>
+                            <h2>Portfolio status</h2>
+                        </div>
+                        <span class="command-live"><i></i> Active</span>
+                    </div>
+
+                    <div class="command-metric-grid">
+                        <div>
+                            <span>Total events</span>
+                            <strong>@Model.TotalEvents</strong>
+                        </div>
+                        <div>
+                            <span>Published</span>
+                            <strong>@Model.PublishedEvents</strong>
+                        </div>
+                        <div>
+                            <span>Tickets sold</span>
+                            <strong>@Model.TotalRegistrations</strong>
+                        </div>
+                        <div>
+                            <span>Occupancy</span>
+                            <strong>@occupancyRate%</strong>
+                        </div>
+                    </div>
+
+                    @if (nextEvent is not null)
+                    {
+                        <div class="command-next-event">
+                            <span>Next published event</span>
+                            <strong>@nextEvent.Title</strong>
+                            <small>
+                                @nextEvent.EventDate.ToString("dd MMM yyyy") ·
+                                @nextEvent.StartTime.ToString(@"hh\:mm") ·
+                                @nextEvent.Venue
+                            </small>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="command-next-event">
+                            <span>Next action</span>
+                            <strong>Prepare your next city event</strong>
+                            <small>Create an event and publish it when the information is ready.</small>
+                        </div>
+                    }
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="professional-section">
+    <div class="container">
+        @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+        {
+            <div class="alert alert-danger modern-alert">@Model.ErrorMessage</div>
+        }
+
+        <div class="professional-section-heading reveal-on-scroll">
+            <div>
+                <span class="section-kicker">Organizer operations</span>
+                <h2>Everything needed to run an event confidently</h2>
+                <p>
+                    Move from planning to public user management without switching between disconnected tools.
+                </p>
+            </div>
+            <a asp-page="/Organizer/Index"
+               class="btn btn-outline-dark">
+                View Full Workspace
+            </a>
+        </div>
+
+        <div class="row g-4 role-feature-grid">
+            <div class="col-md-4">
+                <article class="role-feature-card reveal-on-scroll">
+                    <span class="role-feature-index">01</span>
+                    <h3>Build event listings</h3>
+                    <p>
+                        Define the event schedule, venue, location, public description and publishing status in a structured workflow.
+                    </p>
+                    <a asp-page="/Organizer/Create">Create an event →</a>
+                </article>
+            </div>
+            <div class="col-md-4">
+                <article class="role-feature-card reveal-on-scroll">
+                    <span class="role-feature-index">02</span>
+                    <h3>Configure ticket strategy</h3>
+                    <p>
+                        Set Standard, Premium and VIP categories with independent prices and capacities for each experience.
+                    </p>
+                    <a asp-page="/Organizer/Index">Manage ticketed events →</a>
+                </article>
+            </div>
+            <div class="col-md-4">
+                <article class="role-feature-card reveal-on-scroll">
+                    <span class="role-feature-index">03</span>
+                    <h3>Monitor participation</h3>
+                    <p>
+                        Review ticket sales, attendee details, payment references and event-level participation from one workspace.
+                    </p>
+                    <a asp-page="/Organizer/Index">Review performance →</a>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="professional-section professional-section-soft">
+    <div class="container">
+        <div class="professional-section-heading reveal-on-scroll">
+            <div>
+                <span class="section-kicker">Upcoming portfolio</span>
+                <h2>Your next published events</h2>
+                <p>Keep the most time-sensitive event activity visible from the moment you sign in.</p>
+            </div>
+            <a asp-page="/Events/Index"
+               class="btn btn-outline-dark">
+                Explore Public Events
+            </a>
+        </div>
+
+        @if (upcomingEvents.Count == 0)
+        {
+            <div class="empty-state-card professional-empty reveal-on-scroll">
+                <span class="empty-state-symbol">+</span>
+                <h3>No upcoming published events</h3>
+                <p>Create a new event or publish a prepared draft to make it available to public users.</p>
+                <a asp-page="/Organizer/Create" class="btn btn-kmc-gold">
+                    Create Event
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="row g-4">
+                @foreach (var eventItem in upcomingEvents)
+                {
+                    var available = Math.Max(0, eventItem.Capacity - eventItem.RegisteredParticipantCount);
+
+                    <div class="col-md-6 col-xl-4">
+                        <article class="portfolio-event-card reveal-on-scroll">
+                            <div class="portfolio-event-top">
+                                <span>@eventItem.EventType</span>
+                                <strong>@eventItem.EventDate.ToString("dd")</strong>
+                                <small>@eventItem.EventDate.ToString("MMM yyyy")</small>
+                            </div>
+                            <div class="portfolio-event-body">
+                                <h3>@eventItem.Title</h3>
+                                <p>@eventItem.Venue · @eventItem.Location</p>
+                                <div class="portfolio-event-metrics">
+                                    <span><strong>@eventItem.RegisteredParticipantCount</strong> sold</span>
+                                    <span><strong>@available</strong> available</span>
+                                </div>
+                                <div class="d-flex flex-wrap gap-2 mt-4">
+                                    <a asp-page="/Organizer/Edit"
+                                       asp-route-id="@eventItem.Id"
+                                       class="btn btn-outline-primary btn-sm">
+                                        Manage Event
+                                    </a>
+                                    <a asp-page="/Organizer/Participants"
+                                       asp-route-id="@eventItem.Id"
+                                       class="btn btn-outline-success btn-sm">
+                                        View Public Users
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>

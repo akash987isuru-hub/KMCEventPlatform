@@ -1,0 +1,178 @@
+@page
+@model KMC.Web.Pages.Events.IndexModel
+
+@{
+    ViewData["Title"] = "Explore Events";
+}
+
+<section class="page-hero page-hero-compact">
+    <div class="container">
+        <span class="eyebrow-pill"><span class="eyebrow-dot"></span>Kandy city calendar</span>
+        <div class="page-hero-row">
+            <div>
+                <h1>Discover events across Kandy.</h1>
+                <p>Browse official KMC events together with events published by connected organizer websites.</p>
+            </div>
+            <div class="page-hero-stat"><strong id="matchingEventCount">@Model.TotalEventCount</strong><span>matching event(s)</span></div>
+        </div>
+    </div>
+</section>
+
+<div class="container events-page-wrap">
+    <section class="discovery-strip reveal-on-scroll">
+        <div class="discovery-copy">
+            <span class="section-kicker">Curated city moments</span>
+            <h2>Explore a platform built for lively Kandy experiences.</h2>
+            <p>
+                From cultural celebrations to learning workshops, the KMC platform now combines a colorful dark visual system
+                with trusted event information, secure booking and connected organizer experiences.
+            </p>
+            <a asp-page="/Account/Register" class="btn btn-kmc-gold mt-2">Create an Account</a>
+        </div>
+        <div class="discovery-visual-grid">
+            <figure class="discovery-visual-card">
+                <img src="~/images/kmc-cultural-night.svg" alt="Illustration representing cultural events in Kandy" />
+            </figure>
+            <figure class="discovery-visual-card">
+                <img src="~/images/kmc-ticket-experience.svg" alt="Illustration representing ticket purchase and access" />
+            </figure>
+            <figure class="discovery-visual-card">
+                <img src="~/images/kmc-hero-stage.svg" alt="Illustration representing live events and entertainment" />
+            </figure>
+        </div>
+    </section>
+    <div class="filter-panel reveal-on-scroll">
+        <form method="get" asp-page="/Events/Index">
+            <div class="filter-panel-heading">
+                <div><span class="section-kicker">Find your experience</span><h2>Search city events</h2></div>
+                <a asp-page="/Events/Index" class="clear-filter-link">Reset filters</a>
+            </div>
+            <div class="row g-3">
+                <div class="col-lg-4"><label class="form-label">Keyword</label><input type="text" name="search" value="@Model.Filters.Search" class="form-control" placeholder="Title, organizer or description" /></div>
+                <div class="col-md-6 col-lg-2"><label class="form-label">Event type</label><input type="text" name="eventType" value="@Model.Filters.EventType" class="form-control" placeholder="Cultural" /></div>
+                <div class="col-md-6 col-lg-2"><label class="form-label">Date</label><input type="date" name="date" value="@Model.Filters.Date?.ToString("yyyy-MM-dd")" class="form-control" /></div>
+                <div class="col-md-6 col-lg-2"><label class="form-label">Venue</label><input type="text" name="venue" value="@Model.Filters.Venue" class="form-control" placeholder="Venue" /></div>
+                <div class="col-md-6 col-lg-2"><label class="form-label">Location</label><input type="text" name="location" value="@Model.Filters.Location" class="form-control" placeholder="Kandy" /></div>
+                <div class="col-12"><button type="submit" class="btn btn-dark px-4">Search Events</button></div>
+            </div>
+        </form>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    { <div class="alert alert-danger modern-alert">@Model.ErrorMessage</div> }
+    @if (!string.IsNullOrWhiteSpace(Model.PartnerErrorMessage))
+    { <div class="alert alert-warning modern-alert">@Model.PartnerErrorMessage</div> }
+
+    @if (Model.Events.Count == 0 && Model.PartnerEvents.Count == 0 && string.IsNullOrWhiteSpace(Model.ErrorMessage) && string.IsNullOrWhiteSpace(Model.PartnerErrorMessage))
+    {
+        <div class="empty-state-card reveal-on-scroll"><div class="empty-state-icon">⌕</div><h3>No matching events found</h3><p>Try removing one or more filters.</p><a asp-page="/Events/Index" class="btn btn-dark">Show All Events</a></div>
+    }
+
+    @if (Model.Events.Count > 0)
+    {
+        <div class="events-section-heading"><div><span class="section-kicker">KMC managed events</span><h2>Official city events</h2></div><span>@Model.Events.Count event(s)</span></div>
+        <div class="row g-4 events-grid">
+            @foreach (var eventItem in Model.Events)
+            {
+                var availableSeats = Math.Max(0, eventItem.Capacity - eventItem.RegisteredParticipantCount);
+                var occupancy = eventItem.Capacity > 0 ? Math.Clamp((eventItem.RegisteredParticipantCount * 100) / eventItem.Capacity, 0, 100) : 0;
+                <div class="col-md-6 col-xl-4">
+                    <article class="event-preview-card reveal-on-scroll @(eventItem.HasEnded ? "event-ended" : string.Empty)">
+                        <div class="event-preview-visual">
+                            <span class="event-type-pill">@eventItem.EventType</span>
+                            <div class="event-date-tile"><strong>@eventItem.EventDate.ToString("dd")</strong><span>@eventItem.EventDate.ToString("MMM")</span></div>
+                            <div class="event-preview-pattern"></div>
+                        </div>
+                        <div class="event-preview-body">
+                            <div class="d-flex justify-content-between align-items-center gap-2 mb-2">
+                                <p class="event-location mb-0">@eventItem.Location</p>
+                                @if (eventItem.HasEnded) { <span class="badge bg-secondary">Ended</span> }
+                                else if (eventItem.IsSoldOut) { <span class="badge bg-danger">Sold Out</span> }
+                                else { <span class="badge bg-success">@eventItem.Status</span> }
+                            </div>
+                            <h3>@eventItem.Title</h3>
+                            <p class="small text-info mb-2">Organized by <strong>@eventItem.OrganizerName</strong></p>
+                            <p class="event-description">@(string.IsNullOrWhiteSpace(eventItem.Description) ? "A city event organized for the Kandy community." : eventItem.Description)</p>
+                            <div class="event-detail-list">
+                                <div><span>Date</span><strong>@eventItem.EventDate.ToString("dd MMM yyyy")@(eventItem.EndDate.Date != eventItem.EventDate.Date ? $" – {eventItem.EndDate:dd MMM yyyy}" : "")</strong></div>
+                                <div><span>Time</span><strong>@eventItem.StartTime.ToString(@"hh\:mm") – @eventItem.EndTime.ToString(@"hh\:mm")</strong></div>
+                                <div><span>Venue</span><strong>@eventItem.Venue</strong></div>
+                            </div>
+                            <div class="event-meta-row mt-3"><span>@eventItem.RegisteredParticipantCount / @eventItem.Capacity tickets sold</span><span>@availableSeats places left</span></div>
+                            <div class="event-capacity-bar" aria-hidden="true"><span style="width: @occupancy%"></span></div>
+                            <div class="event-card-footer">
+                                <span>@(eventItem.IsSoldOut ? "Tickets sold out" : $"From LKR {eventItem.MinimumTicketPrice:N2}")</span>
+                                <a asp-page="/Events/Details" asp-route-id="@eventItem.Id">View Details →</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            }
+        </div>
+    }
+
+    @if (Model.PartnerEvents.Count > 0)
+    {
+        <div class="events-section-heading partner-heading"><div><span class="section-kicker">Connected organizer websites</span><h2>Partner organizer events</h2></div><span>@Model.PartnerEvents.Count event(s)</span></div>
+        <div class="row g-4 events-grid">
+            @foreach (var partnerEvent in Model.PartnerEvents)
+            {
+                var occupancy = partnerEvent.TotalCapacity > 0 ? Math.Clamp((partnerEvent.RegisteredParticipantCount * 100) / partnerEvent.TotalCapacity, 0, 100) : 0;
+                <div class="col-md-6 col-xl-4">
+                    <article class="event-preview-card partner-event-card reveal-on-scroll @(partnerEvent.HasEnded ? "event-ended" : string.Empty)">
+                        <div class="event-preview-visual partner-event-visual">
+                            <span class="event-type-pill">@partnerEvent.EventType</span><span class="partner-source-pill">Partner organizer</span>
+                            <div class="event-date-tile"><strong>@partnerEvent.EventDate.ToString("dd")</strong><span>@partnerEvent.EventDate.ToString("MMM")</span></div><div class="event-preview-pattern"></div>
+                        </div>
+                        <div class="event-preview-body">
+                            <div class="d-flex justify-content-between align-items-center gap-2 mb-2"><p class="event-location mb-0">@partnerEvent.Location</p>@if (partnerEvent.HasEnded) { <span class="badge bg-secondary">Ended</span> } else if (partnerEvent.IsSoldOut) { <span class="badge bg-danger">Sold Out</span> } else { <span class="badge bg-success">Live</span> }</div>
+                            <h3>@partnerEvent.Title</h3><p class="small text-info mb-2">Organized by <strong>@partnerEvent.OrganizerName</strong></p>
+                            <p class="event-description">@(string.IsNullOrWhiteSpace(partnerEvent.Description) ? "An event published by a connected independent organizer." : partnerEvent.Description)</p>
+                            <div class="event-detail-list">
+                                <div><span>Date</span><strong>@partnerEvent.EventDate.ToString("dd MMM yyyy")@(partnerEvent.EndDate.Date != partnerEvent.EventDate.Date ? $" – {partnerEvent.EndDate:dd MMM yyyy}" : "")</strong></div>
+                                <div><span>Time</span><strong>@partnerEvent.StartTime.ToString(@"hh\:mm") – @partnerEvent.EndTime.ToString(@"hh\:mm")</strong></div>
+                                <div><span>Venue</span><strong>@partnerEvent.Venue</strong></div>
+                            </div>
+                            <div class="event-meta-row mt-3"><span>@partnerEvent.RegisteredParticipantCount / @partnerEvent.TotalCapacity tickets sold</span><span>@partnerEvent.AvailableCount places left</span></div>
+                            <div class="event-capacity-bar" aria-hidden="true"><span style="width: @occupancy%"></span></div>
+                            <div class="event-card-footer"><span>@(partnerEvent.IsSoldOut ? "Tickets sold out" : $"From LKR {partnerEvent.MinimumTicketPrice:N2}")</span><a asp-page="/PartnerEvents/Details" asp-route-id="@partnerEvent.Id">View Details →</a></div>
+                        </div>
+                    </article>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        (() => {
+            const countElement = document.getElementById('matchingEventCount');
+            if (!countElement) return;
+
+            const endpoint = new URL(window.location.href);
+            endpoint.searchParams.set('handler', 'Count');
+
+            const refreshEventCount = async () => {
+                try {
+                    const response = await fetch(endpoint, {
+                        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                        cache: 'no-store'
+                    });
+
+                    if (!response.ok) return;
+
+                    const data = await response.json();
+                    if (Number.isInteger(data.count)) {
+                        countElement.textContent = data.count.toString();
+                    }
+                } catch {
+                    // Keep the last successfully loaded event count.
+                }
+            };
+
+            refreshEventCount();
+            window.setInterval(refreshEventCount, 10000);
+        })();
+    </script>
+}

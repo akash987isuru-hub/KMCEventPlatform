@@ -1,0 +1,52 @@
+@page
+@model KMC.Web.Pages.StatusModel
+
+@{
+    var statusCode = Model.StatusCodeValue;
+    var statusTitle = Model.StatusTitle;
+    ViewData["Title"] = statusTitle;
+}
+
+<section class="status-page">
+    <div class="container">
+        <div class="status-card glass-interactive">
+            <span class="status-code">@statusCode</span>
+            <span class="section-kicker">KMC Event Platform</span>
+            <h1>@statusTitle</h1>
+
+            @if (statusCode == 404)
+            {
+                <p>
+                    The page or event you requested is unavailable, may have
+                    been removed, or is not published for public access.
+                </p>
+            }
+            else if (statusCode == 403)
+            {
+                <p>
+                    Your current account role does not have permission to use
+                    this area of the platform.
+                </p>
+            }
+            else
+            {
+                <p>
+                    The request could not be completed. Return to the platform
+                    and try the operation again.
+                </p>
+            }
+
+            <div class="d-flex flex-wrap justify-content-center gap-2 mt-4">
+                <a class="btn btn-kmc-gold"
+                   asp-page="/Index">
+                    Return Home
+                </a>
+
+                <a class="btn btn-hero-outline"
+                   asp-page="/Events/Index">
+                    Explore Events
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

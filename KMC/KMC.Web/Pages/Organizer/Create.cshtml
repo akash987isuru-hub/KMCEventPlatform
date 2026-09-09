@@ -1,0 +1,59 @@
+@page
+@model KMC.Web.Pages.Organizer.CreateModel
+
+@{
+    ViewData["Title"] = "Create Event";
+}
+
+<div class="container py-5">
+    <div class="mb-4">
+        <a asp-page="/Organizer/Index"
+           class="text-decoration-none text-secondary">
+            ← Back to Organizer Workspace
+        </a>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-xl-10">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4 p-lg-5">
+                    <span class="badge bg-warning text-dark mb-2">Organizer Interface</span>
+                    <h1 class="h2 fw-bold">Create a ticketed event</h1>
+                    <p class="text-muted mb-4">
+                        Add the event details and manually configure Standard, Premium and VIP-style ticket categories.
+                    </p>
+
+                    <form asp-page="/Organizer/Create"
+                          method="post">
+                        <partial name="_EventForm" for="Input" />
+
+                        <div class="d-flex flex-wrap gap-2 mt-4">
+                            <button type="submit" class="btn btn-kmc-gold px-4">
+                                Create Event and Tickets
+                            </button>
+                            <a asp-page="/Organizer/Index"
+                               class="btn btn-outline-secondary">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.querySelectorAll('.ticket-capacity-input').forEach(input => {
+            input.addEventListener('input', updateTicketCapacity);
+        });
+
+        function updateTicketCapacity() {
+            const total = [...document.querySelectorAll('.ticket-capacity-input')]
+                .reduce((sum, input) => sum + (parseInt(input.value || '0', 10) || 0), 0);
+            document.getElementById('totalTicketCapacity').textContent = total;
+        }
+    </script>
+}

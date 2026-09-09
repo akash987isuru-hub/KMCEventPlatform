@@ -1,0 +1,113 @@
+@page
+@model KMC.Web.Pages.AboutModel
+
+@{
+    ViewData["Title"] = "About the Platform";
+}
+
+<section class="about-hero">
+    <div class="container">
+        <div class="about-hero-layout">
+            <div>
+                <span class="eyebrow-pill">
+                    <span class="eyebrow-dot"></span>
+                    About KMC Events
+                </span>
+                <h1>A connected digital service for Kandy's event community.</h1>
+                <p>
+                    The KMC Event Platform helps organizers publish and manage events,
+                    allows public users to discover and register for experiences, and gives
+                    Kandy Municipal Council a reusable service-oriented foundation for
+                    future city integrations.
+                </p>
+            </div>
+
+            <div>
+                <div class="about-visual-collage">
+                    <figure class="about-visual-card">
+                        <img src="~/images/kmc-community-ticket.svg"
+                             alt="Illustration of connected city event management and ticketing" />
+                    </figure>
+                    <div class="about-visual-caption">
+                        <span class="about-visual-kicker">Connected experience</span>
+                        <h3 class="h5 fw-bold mb-2">Designed for public users, organizers and the city.</h3>
+                        <p class="mb-0">
+                            A colorful dark interface keeps discovery, booking and event management clear across the platform.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-block">
+    <div class="container">
+        <div class="section-heading section-heading-centered">
+            <div>
+                <span class="section-kicker">Platform principles</span>
+                <h2>Built around clarity, trust and service reuse</h2>
+                <p>
+                    Each part of the system is designed to support maintainability,
+                    secure access and a consistent experience across user roles.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="about-card reveal-on-scroll">
+                    <strong>For public users</strong>
+                    <p>
+                        Search published events, view complete details, register
+                        securely and manage registrations from one personal area.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="about-card reveal-on-scroll">
+                    <strong>For organizers</strong>
+                    <p>
+                        Create, publish and update events, manage lifecycle status,
+                        and monitor public user registrations safely.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="about-card reveal-on-scroll">
+                    <strong>For Kandy city</strong>
+                    <p>
+                        A centralized REST-based service layer that can support the
+                        municipal website and future external organizer systems.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="role-cta mt-5 reveal-on-scroll">
+            <div class="role-cta-content">
+                <span class="section-kicker section-kicker-light">
+                    Privacy and responsible access
+                </span>
+                <h2>Your account is protected through role-based authentication.</h2>
+                <p>
+                    The platform uses authenticated access for public user and
+                    organizer operations. Users only receive the functions allowed
+                    for their role, while public visitors can safely browse published
+                    city events.
+                </p>
+                <a class="btn btn-kmc-gold"
+                   asp-page="/Events/Index">
+                    Explore Published Events
+                </a>
+            </div>
+
+            <div class="role-cta-seal" aria-hidden="true">
+                <span>KMC</span>
+                <small>TRUST</small>
+            </div>
+        </div>
+    </div>
+</section>

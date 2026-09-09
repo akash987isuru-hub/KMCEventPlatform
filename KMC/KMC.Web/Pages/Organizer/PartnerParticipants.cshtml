@@ -1,0 +1,117 @@
+@page
+@model KMC.Web.Pages.Organizer.PartnerParticipantsModel
+
+@{
+    ViewData["Title"] = "Connected Event Sales";
+    var confirmedTickets = Model.Bookings
+        .Where(item => string.Equals(item.BookingStatus, "Confirmed", StringComparison.OrdinalIgnoreCase))
+        .Sum(item => item.Quantity);
+    var approvedRevenue = Model.Bookings
+        .Where(item => string.Equals(item.PaymentStatus, "Approved", StringComparison.OrdinalIgnoreCase))
+        .Sum(item => item.TotalAmount);
+}
+
+<section class="management-page-shell">
+    <div class="container py-5">
+        <a asp-page="/Organizer/Index" class="management-back-link">
+            <span aria-hidden="true">←</span> Back to Organizer Workspace
+        </a>
+
+        <div class="management-page-heading mt-4">
+            <div>
+                <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Connected Event</span>
+                <h1>Ticket Sales &amp; Public Users</h1>
+                <p>@Model.Event.Title</p>
+            </div>
+            <a asp-page="/Organizer/PartnerEdit"
+               asp-route-id="@Model.Event.Id"
+               class="btn btn-outline-primary">
+                Edit Event Tickets
+            </a>
+        </div>
+
+        <div class="row g-4 my-4">
+            <div class="col-md-4">
+                <div class="dashboard-stat-card">
+                    <span>Booking records</span>
+                    <strong>@Model.Bookings.Count</strong>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="dashboard-stat-card">
+                    <span>Confirmed tickets</span>
+                    <strong>@confirmedTickets</strong>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="dashboard-stat-card">
+                    <span>Approved revenue</span>
+                    <strong class="dashboard-money">LKR @approvedRevenue.ToString("N2")</strong>
+                </div>
+            </div>
+        </div>
+
+        @if (Model.Bookings.Count == 0)
+        {
+            <div class="empty-state-card">
+                <h2 class="h4 fw-bold">No ticket purchases yet</h2>
+                <p class="mb-0">Public users will appear here after booking through KMC or the connected organizer website.</p>
+            </div>
+        }
+        else
+        {
+            <div class="management-table-card">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Public User</th>
+                                <th>Ticket</th>
+                                <th>Quantity &amp; Total</th>
+                                <th>Source</th>
+                                <th>Payment</th>
+                                <th>Reference</th>
+                                <th>Booked</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var booking in Model.Bookings)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong class="d-block">@booking.CustomerName</strong>
+                                        <small class="text-muted d-block">@booking.CustomerEmail</small>
+                                        <small class="text-muted">@booking.CustomerPhone</small>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-warning text-dark">@booking.TicketTierName</span>
+                                        <small class="d-block mt-1">LKR @booking.UnitPrice.ToString("N2") each</small>
+                                    </td>
+                                    <td>
+                                        <strong>@booking.Quantity ticket(s)</strong>
+                                        <small class="d-block mt-1">LKR @booking.TotalAmount.ToString("N2")</small>
+                                    </td>
+                                    <td><span class="connected-source-badge badge">@booking.BookingSource</span></td>
+                                    <td>
+                                        <span class="badge @(booking.PaymentStatus == "Approved" ? "bg-success" : "bg-secondary")">
+                                            @booking.PaymentStatus
+                                        </span>
+                                        <small class="d-block mt-1">@booking.CardDisplay</small>
+                                    </td>
+                                    <td class="transaction-reference">@booking.TransactionReference</td>
+                                    <td>@booking.CreatedAt.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")</td>
+                                    <td>
+                                        <span class="badge @(booking.BookingStatus == "Confirmed" ? "bg-success" : "bg-secondary")">
+                                            @booking.BookingStatus
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+</section>

@@ -1,0 +1,196 @@
+@page
+@model KMC.Web.Pages.Checkout.IndexModel
+
+@{
+    ViewData["Title"] = "Ticket Checkout";
+    var eventItem = Model.Event;
+    var ticket = Model.SelectedTicket;
+}
+
+<div class="container py-5 checkout-page">
+    <div class="mb-4">
+        <a asp-page="/Events/Details"
+           asp-route-id="@Model.Input.EventId"
+           class="text-decoration-none text-secondary checkout-back-link">
+            ← Back to event
+        </a>
+    </div>
+
+    <div class="row g-4 g-xl-5 justify-content-center">
+        <div class="col-lg-5">
+            <div class="card border-0 shadow-sm sticky-lg-top checkout-summary-card">
+                <div class="card-body p-4 p-xl-5">
+                    <span class="badge bg-warning text-dark mb-3">Public User Interface</span>
+                    <h1 class="h2 fw-bold">Order summary</h1>
+
+                    @if (eventItem is not null && ticket is not null)
+                    {
+                        <div class="checkout-event-summary">
+                            <span>@eventItem.EventType</span>
+                            <h2 class="h4">@eventItem.Title</h2>
+                            <p>
+                                @eventItem.EventDate.ToString("dd MMM yyyy")
+                                @if (eventItem.EndDate.Date != eventItem.EventDate.Date)
+                                {
+                                    <text> – @eventItem.EndDate.ToString("dd MMM yyyy")</text>
+                                }
+                                · @eventItem.StartTime.ToString(@"hh\:mm")
+                            </p>
+                            <p>@eventItem.Venue, @eventItem.Location</p>
+                        </div>
+
+                        <div class="checkout-price-row">
+                            <div>
+                                <span>@ticket.Name ticket</span>
+                                <small>@ticket.RemainingCount remaining · LKR @ticket.Price.ToString("N2") each</small>
+                            </div>
+                            <strong id="orderTotal">LKR @Model.Input.TotalAmount.ToString("N2")</strong>
+                        </div>
+                    }
+
+                    <div class="alert alert-info checkout-security-note mb-0 mt-3">
+                        Payment verification for this platform does not connect to a live banking gateway. The full card number and CVV are never stored; only the card type and final four digits are retained with the transaction record.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <div class="card border-0 shadow-sm checkout-payment-card">
+                <div class="card-body p-4 p-xl-5">
+                    <span class="section-kicker">Secure card payment</span>
+                    <h2 class="display-6 fw-bold mb-2">Complete your ticket purchase</h2>
+                    <p class="text-muted checkout-intro mb-4">
+                        Enter a card holder name, any 16-digit card number, a valid expiry date and a 3-digit CVV.
+                    </p>
+
+                    <form asp-page="/Checkout/Index"
+                          method="post">
+                        <input asp-for="Input.EventId" type="hidden" />
+                        <input asp-for="Input.TicketTierId" type="hidden" />
+
+                        <div class="mb-4">
+                            <label asp-for="Input.Quantity" class="form-label"></label>
+                            <input asp-for="Input.Quantity"
+                                   type="number"
+                                   min="1"
+                                   max="@(ticket is null ? 10 : Math.Min(10, ticket.RemainingCount))"
+                                   class="form-control form-control-lg"
+                                   data-unit-price="@(ticket?.Price ?? 0)" />
+                            <div class="form-text">Choose up to 10 tickets, subject to availability.</div>
+                            <span asp-validation-for="Input.Quantity" class="text-danger"></span>
+                        </div>
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="alert alert-danger"></div>
+
+                        <div class="mb-4">
+                            <label asp-for="Input.CardHolderName" class="form-label"></label>
+                            <input asp-for="Input.CardHolderName"
+                                   class="form-control form-control-lg"
+                                   autocomplete="cc-name"
+                                   placeholder="Name on card" />
+                            <span asp-validation-for="Input.CardHolderName"
+                                  class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Input.CardNumber" class="form-label"></label>
+                            <input asp-for="Input.CardNumber"
+                                   class="form-control form-control-lg"
+                                   inputmode="numeric"
+                                   autocomplete="cc-number"
+                                   maxlength="19"
+                                   placeholder="1234 5678 9012 3456" />
+                            <div class="form-text">Enter exactly 16 digits. Spaces are added automatically.</div>
+                            <span asp-validation-for="Input.CardNumber"
+                                  class="text-danger"></span>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label asp-for="Input.ExpiryMonth" class="form-label"></label>
+                                <select asp-for="Input.ExpiryMonth"
+                                        class="form-select form-select-lg"
+                                        autocomplete="cc-exp-month">
+                                    @for (var month = 1; month <= 12; month++)
+                                    {
+                                        <option value="@month">@month.ToString("00")</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="Input.ExpiryMonth" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label asp-for="Input.ExpiryYear" class="form-label"></label>
+                                <select asp-for="Input.ExpiryYear"
+                                        class="form-select form-select-lg"
+                                        autocomplete="cc-exp-year">
+                                    @for (var year = DateTime.Today.Year; year <= DateTime.Today.Year + 12; year++)
+                                    {
+                                        <option value="@year">@year</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="Input.ExpiryYear" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label asp-for="Input.Cvv" class="form-label"></label>
+                                <input asp-for="Input.Cvv"
+                                       class="form-control form-control-lg"
+                                       type="password"
+                                       inputmode="numeric"
+                                       autocomplete="cc-csc"
+                                       maxlength="3"
+                                       placeholder="123" />
+                                <span asp-validation-for="Input.Cvv" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-kmc-gold btn-lg w-100 mt-4 checkout-pay-button">
+                            @if (ticket is not null)
+                            {
+                                <text>Pay LKR <span id="payButtonTotal">@Model.Input.TotalAmount.ToString("N2")</span> and Confirm Tickets</text>
+                            }
+                            else
+                            {
+                                <text>Confirm Ticket Purchase</text>
+                            }
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        const cardInput = document.getElementById('Input_CardNumber');
+        cardInput?.addEventListener('input', function () {
+            const digits = this.value.replace(/\D/g, '').slice(0, 16);
+            this.value = digits.replace(/(.{4})/g, '$1 ').trim();
+        });
+
+        const quantityInput = document.getElementById('Input_Quantity');
+        const orderTotal = document.getElementById('orderTotal');
+        const payButtonTotal = document.getElementById('payButtonTotal');
+        const updateTotal = () => {
+            if (!quantityInput) return;
+            const quantity = Math.max(1, Number(quantityInput.value || 1));
+            const unitPrice = Number(quantityInput.dataset.unitPrice || 0);
+            const formatted = (quantity * unitPrice).toLocaleString('en-LK', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            if (orderTotal) orderTotal.textContent = `LKR ${formatted}`;
+            if (payButtonTotal) payButtonTotal.textContent = formatted;
+        };
+        quantityInput?.addEventListener('input', updateTotal);
+        updateTotal();
+
+        const cvvInput = document.getElementById('Input_Cvv');
+        cvvInput?.addEventListener('input', function () {
+            this.value = this.value.replace(/\D/g, '').slice(0, 3);
+        });
+    </script>
+}
