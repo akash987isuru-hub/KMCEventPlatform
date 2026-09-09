@@ -1,0 +1,18 @@
+KMC Event Platform
+
+Demo Login Details
+
+KMC Website - Organizer Account
+
+Please use the following login details on the KMC website to test how the main KMC website connects with the external organizer website.
+
+External Organizer Name: Sparkling Events Kandy
+
+Email: sparkling@gmail.com
+
+Password: Sparkling123
+
+How the connection works:
+
+I linked this organizer account to the external "Sparkling Events Kandy" website using the organizer's name. If you publish an event on the external website, the two APIs (Organizer.Api and KMC.Api) will share the data with each other. Because of this sync, the event will automatically show up on the main KMC website (KMC.Web).
+
