@@ -1,0 +1,164 @@
+@page
+@model KMC.Web.Pages.PartnerEvents.DetailsModel
+
+@{
+    ViewData["Title"] = Model.EventItem.Title;
+    var isParticipant = User.Identity?.IsAuthenticated == true && User.IsInRole("Participant");
+    var switchAccount = User.Identity?.IsAuthenticated == true && !isParticipant;
+}
+
+<section class="page-hero partner-detail-hero">
+    <div class="container">
+        <span class="eyebrow-pill">
+            <span class="eyebrow-dot"></span>
+            Connected organizer event
+        </span>
+
+        <div class="page-hero-row">
+            <div>
+                <h1>@Model.EventItem.Title</h1>
+                <p>@Model.EventItem.Description</p>
+                <p class="mb-0">
+                    Organized by <strong>@Model.EventItem.OrganizerName</strong>
+                </p>
+            </div>
+
+            <div class="page-hero-stat">
+                @if (Model.EventItem.HasEnded)
+                {
+                    <strong>Ended</strong>
+                    <span>Ticket sales closed</span>
+                }
+                else if (Model.EventItem.IsSoldOut)
+                {
+                    <strong>Sold Out</strong>
+                    <span>No tickets remaining</span>
+                }
+                else
+                {
+                    <strong>@Model.EventItem.AvailableCount</strong>
+                    <span>ticket(s) available</span>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container partner-detail-wrap">
+    <main class="partner-detail-main">
+        <section class="partner-fact-grid" aria-label="Event information">
+            <div>
+                <span>Date</span>
+                <strong>
+                    @Model.EventItem.EventDate.ToString("dddd, dd MMMM yyyy")
+                    @(Model.EventItem.EndDate.Date != Model.EventItem.EventDate.Date
+                        ? $" – {Model.EventItem.EndDate:dddd, dd MMMM yyyy}"
+                        : "")
+                </strong>
+            </div>
+            <div>
+                <span>Time</span>
+                <strong>
+                    @Model.EventItem.StartTime.ToString(@"hh\:mm") –
+                    @Model.EventItem.EndTime.ToString(@"hh\:mm")
+                </strong>
+            </div>
+            <div>
+                <span>Venue</span>
+                <strong>@Model.EventItem.Venue</strong>
+            </div>
+            <div>
+                <span>Location</span>
+                <strong>@Model.EventItem.Location</strong>
+            </div>
+            <div>
+                <span>Organizer</span>
+                <strong>@Model.EventItem.OrganizerName</strong>
+            </div>
+            <div>
+                <span>Tickets sold</span>
+                <strong>@Model.EventItem.RegisteredParticipantCount / @Model.EventItem.TotalCapacity</strong>
+            </div>
+        </section>
+
+        <div class="events-section-heading mt-5">
+            <div>
+                <span class="section-kicker">Shared ticket inventory</span>
+                <h2>Choose a ticket</h2>
+            </div>
+            <span>Updated @Model.EventItem.LastSyncedAt.ToLocalTime().ToString("HH:mm")</span>
+        </div>
+
+        @if (Model.EventItem.HasEnded)
+        {
+            <div class="alert alert-secondary">
+                This event has ended. Ticket sales are closed across the connected platforms.
+            </div>
+        }
+        else
+        {
+            <div class="partner-ticket-grid">
+                @foreach (var tier in Model.EventItem.TicketTiers.OrderBy(item => item.SortOrder))
+                {
+                    var checkoutUrl = Url.Page(
+                        "/PartnerEvents/Checkout",
+                        new
+                        {
+                            eventId = Model.EventItem.Id,
+                            ticketTierId = tier.Id
+                        }) ?? "/Events";
+
+                    <article class="partner-ticket-option @(tier.AvailableCount == 0 ? "sold-out" : "")">
+                        <span class="section-kicker">Ticket category</span>
+                        <h3>@tier.Name</h3>
+                        <p>
+                            @(string.IsNullOrWhiteSpace(tier.Description)
+                                ? "Admission to this connected event."
+                                : tier.Description)
+                        </p>
+                        <strong>LKR @tier.Price.ToString("N2")</strong>
+                        <span>@tier.AvailableCount of @tier.Capacity available</span>
+
+                        @if (tier.AvailableCount <= 0)
+                        {
+                            <button type="button" class="btn btn-secondary" disabled>
+                                Sold Out
+                            </button>
+                        }
+                        else if (isParticipant)
+                        {
+                            <a asp-page="/PartnerEvents/Checkout"
+                               asp-route-eventId="@Model.EventItem.Id"
+                               asp-route-ticketTierId="@tier.Id"
+                               class="btn btn-dark">
+                                Book through KMC
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-page="/Account/Login"
+                               asp-route-returnUrl="@checkoutUrl"
+                               asp-route-switchAccount="@switchAccount"
+                               class="btn btn-dark">
+                                Sign in
+                            </a>
+                        }
+                    </article>
+                }
+            </div>
+        }
+    </main>
+
+    <aside class="partner-service-note">
+        <span>Connected service</span>
+        <h3>One event, one live ticket inventory.</h3>
+        <p>
+            Every booking completed through KMC updates the same ticket stock used by
+            @Model.EventItem.OrganizerName.
+        </p>
+        <div class="connected-sync-note">
+            <span>Last synchronized</span>
+            <strong>@Model.EventItem.LastSyncedAt.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")</strong>
+        </div>
+    </aside>
+</div>

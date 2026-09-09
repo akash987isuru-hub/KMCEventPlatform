@@ -1,0 +1,72 @@
+@page "{registrationId:int}"
+@model KMC.Web.Pages.Registrations.PrintTicketModel
+@{
+    Layout = null;
+    var ticket = Model.Registration;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Print Ticket - @ticket.EventTitle</title>
+    <style>
+        :root { color-scheme: dark; }
+        * { box-sizing: border-box; }
+        body { margin: 0; min-height: 100vh; padding: 32px; font-family: "Segoe UI Variable", Aptos, "Segoe UI", sans-serif; color: #eef4ff; background: radial-gradient(circle at top right,#20335b 0,transparent 34rem),#050a14; }
+        .toolbar { max-width: 900px; margin: 0 auto 20px; display: flex; justify-content: space-between; gap: 12px; }
+        .button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 18px; border: 1px solid #405477; border-radius: 12px; color: #fff; background: #111d32; text-decoration: none; font-weight: 700; cursor: pointer; }
+        .button.primary { color: #111827; border-color: #ffc966; background: linear-gradient(135deg,#ffd77f,#f4ae3f); }
+        .ticket { position: relative; max-width: 900px; margin: 0 auto; overflow: hidden; border: 1px solid rgba(124,151,196,.38); border-radius: 28px; background: linear-gradient(145deg,#111d32,#091220); box-shadow: 0 32px 80px rgba(0,0,0,.45); }
+        .ticket::before { content:""; position:absolute; inset:0 0 auto; height:7px; background:linear-gradient(90deg,#55e3c2,#7f8cff,#ffc45e); }
+        .head { padding: 34px; border-bottom: 1px dashed rgba(158,177,211,.34); display:flex; justify-content:space-between; gap:20px; }
+        .brand { color:#66e3c7; font-size:12px; font-weight:900; letter-spacing:.14em; text-transform:uppercase; }
+        h1 { margin:10px 0 8px; font-size:clamp(30px,5vw,56px); line-height:1; letter-spacing:-.04em; }
+        .reference { align-self:flex-start; padding:10px 14px; border:1px solid rgba(255,196,94,.35); border-radius:999px; color:#ffd37c; background:rgba(255,196,94,.08); font-weight:800; white-space:nowrap; }
+        .schedule { color:#a8b7cf; }
+        .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; padding:28px 34px 34px; }
+        .grid > div { min-height:105px; padding:18px; border:1px solid rgba(142,162,197,.2); border-radius:16px; background:rgba(3,9,19,.5); }
+        .grid span { display:block; margin-bottom:9px; color:#7f91ae; font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+        .grid strong { color:#fff; font-size:17px; overflow-wrap:anywhere; }
+        .note { margin:0 34px 34px; padding:16px 18px; border:1px solid rgba(85,227,194,.22); border-radius:15px; color:#aeeede; background:rgba(85,227,194,.07); }
+        @@media (max-width:700px){ body{padding:16px}.head{flex-direction:column}.grid{grid-template-columns:1fr}.reference{white-space:normal}.toolbar{flex-wrap:wrap} }
+        @@media print {
+            :root { color-scheme: light; }
+            body { padding:0; color:#111827; background:#fff; }
+            .toolbar { display:none; }
+            .ticket { max-width:none; border:1px solid #111827; border-radius:0; color:#111827; background:#fff; box-shadow:none; }
+            .head,.grid>div { border-color:#cbd5e1; background:#fff; }
+            h1,.grid strong { color:#111827; }
+            .brand { color:#0f766e; }
+            .schedule,.grid span { color:#475569; }
+            .reference { color:#92400e; border-color:#d97706; background:#fff7ed; }
+            .note { color:#115e59; border-color:#5eead4; background:#f0fdfa; }
+        }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <a class="button" href="/Registrations">← My Tickets</a>
+        <button class="button primary" type="button" onclick="window.print()">Print Ticket</button>
+    </div>
+    <article class="ticket">
+        <header class="head">
+            <div>
+                <span class="brand">KMC verified city event ticket</span>
+                <h1>@ticket.EventTitle</h1>
+                <div class="schedule">@ticket.EventDate.ToString("dddd, dd MMMM yyyy") · @ticket.StartTime.ToString(@"hh\:mm")</div>
+            </div>
+            <span class="reference">KMC-@ticket.Id.ToString("000000")</span>
+        </header>
+        <section class="grid">
+            <div><span>Ticket holder</span><strong>@ticket.ParticipantName</strong></div>
+            <div><span>Category</span><strong>@ticket.TicketTierName × @ticket.Quantity</strong></div>
+            <div><span>Amount paid</span><strong>LKR @ticket.TotalAmount.ToString("N2")</strong></div>
+            <div><span>Payment</span><strong>@ticket.PaymentStatus</strong></div>
+            <div><span>Card</span><strong>@ticket.CardDisplay</strong></div>
+            <div><span>Transaction</span><strong>@ticket.TransactionReference</strong></div>
+        </section>
+        <div class="note">Present this ticket at the event entrance. Keep the transaction reference available for verification.</div>
+    </article>
+</body>
+</html>
