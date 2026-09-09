@@ -1,0 +1,373 @@
+/* KMC Event Platform — typography and secure checkout refinement */
+:root {
+    --kmc-font-body: "Segoe UI Variable Text", Aptos, "Segoe UI", system-ui, sans-serif;
+    --kmc-font-display: Bahnschrift, "Segoe UI Variable Display", "Aptos Display", "Segoe UI", sans-serif;
+    --kmc-font-label: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+    --kmc-checkout-surface: rgba(12, 20, 36, 0.96);
+    --kmc-checkout-surface-raised: rgba(18, 30, 51, 0.94);
+    --kmc-checkout-border: rgba(148, 163, 184, 0.20);
+    --kmc-checkout-glow: rgba(116, 132, 255, 0.18);
+}
+
+body.kmc-dark-theme {
+    font-family: var(--kmc-font-body) !important;
+    font-variation-settings: "wght" 430;
+    text-rendering: optimizeLegibility;
+}
+
+body.kmc-dark-theme h1,
+body.kmc-dark-theme h2,
+body.kmc-dark-theme h3,
+body.kmc-dark-theme h4,
+body.kmc-dark-theme .brand-copy strong,
+body.kmc-dark-theme .card-title,
+body.kmc-dark-theme .event-card-title {
+    font-family: var(--kmc-font-display) !important;
+    font-stretch: semi-condensed;
+    letter-spacing: -0.025em;
+}
+
+body.kmc-dark-theme .page-hero h1,
+body.kmc-dark-theme .hero-title {
+    color: #ffffff !important;
+    background: linear-gradient(100deg, #ffffff 8%, #dfe5ff 58%, #8ee9d6 115%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.kmc-dark-theme .section-kicker,
+body.kmc-dark-theme .eyebrow-pill,
+body.kmc-dark-theme .event-card-meta-label,
+body.kmc-dark-theme .partner-service-note > span,
+body.kmc-dark-theme .partner-order-summary > span {
+    font-family: var(--kmc-font-label) !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.1em !important;
+}
+
+body.kmc-dark-theme .partner-ticket-option > strong,
+body.kmc-dark-theme .page-hero-stat strong,
+body.kmc-dark-theme .checkout-price-chip,
+body.kmc-dark-theme .partner-order-summary dd {
+    font-family: Bahnschrift, var(--kmc-font-display) !important;
+    font-variant-numeric: tabular-nums;
+}
+
+body.kmc-dark-theme .partner-ticket-option .btn-dark,
+body.kmc-dark-theme .ticket-choice .btn,
+body.kmc-dark-theme .checkout-pay-button {
+    border: 1px solid rgba(142, 154, 255, 0.55) !important;
+    background: linear-gradient(110deg, #6677ff 0%, #8068f6 100%) !important;
+    color: #fff !important;
+    box-shadow: 0 12px 28px rgba(102, 119, 255, 0.24) !important;
+}
+
+body.kmc-dark-theme .partner-ticket-option .btn-dark:hover,
+body.kmc-dark-theme .ticket-choice .btn:hover,
+body.kmc-dark-theme .checkout-pay-button:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.65) !important;
+    box-shadow: 0 17px 36px rgba(102, 119, 255, 0.34) !important;
+}
+
+/* Checkout page */
+body.kmc-dark-theme .checkout-hero {
+    min-height: auto !important;
+    padding: clamp(2.2rem, 6vw, 4.2rem) 0 clamp(2rem, 5vw, 3.4rem) !important;
+    overflow: visible !important;
+    border-bottom: 1px solid var(--kmc-checkout-border) !important;
+    background:
+        radial-gradient(circle at 74% 14%, rgba(46, 211, 183, 0.12), transparent 24rem),
+        radial-gradient(circle at 12% 20%, rgba(116, 132, 255, 0.16), transparent 26rem),
+        linear-gradient(135deg, #080d1b 0%, #0b1428 55%, #08121e 100%) !important;
+}
+
+body.kmc-dark-theme .checkout-hero h1 {
+    margin: 0.9rem 0 0.55rem !important;
+    max-width: 900px;
+    font-size: clamp(2.4rem, 6vw, 5.4rem) !important;
+    line-height: 0.98 !important;
+}
+
+body.kmc-dark-theme .checkout-hero p {
+    max-width: 760px;
+    margin-bottom: 0 !important;
+    color: #aebbd0 !important;
+    font-size: clamp(0.98rem, 1.6vw, 1.12rem);
+}
+
+body.kmc-dark-theme .checkout-page-shell {
+    position: relative;
+    padding-top: clamp(2rem, 5vw, 4rem) !important;
+    padding-bottom: clamp(3rem, 7vw, 6rem) !important;
+}
+
+body.kmc-dark-theme .checkout-page-shell::before {
+    content: "";
+    position: absolute;
+    inset: 1rem auto auto -8rem;
+    width: 28rem;
+    height: 28rem;
+    border-radius: 50%;
+    background: rgba(116, 132, 255, 0.055);
+    filter: blur(90px);
+    pointer-events: none;
+}
+
+body.kmc-dark-theme .checkout-form-card {
+    position: relative;
+    z-index: 1;
+    padding: clamp(1.4rem, 3.4vw, 2.5rem) !important;
+    color: var(--kmc-text) !important;
+    border: 1px solid var(--kmc-checkout-border) !important;
+    border-radius: 24px !important;
+    background:
+        linear-gradient(145deg, rgba(20, 31, 52, 0.96), rgba(10, 17, 31, 0.98)) !important;
+    box-shadow:
+        0 28px 70px rgba(0, 0, 0, 0.34),
+        inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
+}
+
+body.kmc-dark-theme .checkout-section-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.2rem;
+    margin-bottom: 1.25rem;
+}
+
+body.kmc-dark-theme .checkout-section-heading h2 {
+    margin: 0.3rem 0 0;
+    font-size: clamp(1.55rem, 2.6vw, 2.1rem);
+}
+
+body.kmc-dark-theme .checkout-price-chip,
+body.kmc-dark-theme .secure-payment-note {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 0.45rem 0.75rem;
+    border: 1px solid rgba(243, 185, 85, 0.28);
+    border-radius: 999px;
+    color: #ffd584 !important;
+    background: rgba(243, 185, 85, 0.09);
+    font-size: 0.78rem;
+    font-weight: 750;
+    white-space: nowrap;
+}
+
+body.kmc-dark-theme .secure-payment-note {
+    border-color: rgba(46, 211, 183, 0.28);
+    color: #8ee9d6 !important;
+    background: rgba(46, 211, 183, 0.08);
+}
+
+body.kmc-dark-theme .selected-ticket-panel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+    margin-bottom: 1.4rem;
+}
+
+body.kmc-dark-theme .selected-ticket-panel > div {
+    display: flex;
+    flex-direction: column;
+    min-height: 128px;
+    padding: 1rem 1.05rem;
+    border: 1px solid var(--kmc-checkout-border);
+    border-radius: 16px;
+    background: rgba(8, 14, 27, 0.64);
+}
+
+body.kmc-dark-theme .selected-ticket-panel span {
+    color: #8291a8 !important;
+    font-family: var(--kmc-font-label);
+    font-size: 0.67rem;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+body.kmc-dark-theme .selected-ticket-panel strong {
+    margin: 0.55rem 0 0.35rem;
+    color: #fff !important;
+    font-size: 1.08rem;
+}
+
+body.kmc-dark-theme .selected-ticket-panel small {
+    margin-top: auto;
+    color: #8f9db2 !important;
+    line-height: 1.55;
+}
+
+body.kmc-dark-theme .checkout-field-block {
+    max-width: 290px;
+}
+
+body.kmc-dark-theme .quantity-control {
+    display: grid;
+    grid-template-columns: 48px minmax(80px, 1fr) 48px;
+    overflow: hidden;
+    border: 1px solid rgba(148, 163, 184, 0.23);
+    border-radius: 14px;
+    background: rgba(5, 10, 21, 0.78);
+}
+
+body.kmc-dark-theme .quantity-control .form-control {
+    height: 48px;
+    padding: 0.55rem;
+    border: 0 !important;
+    border-inline: 1px solid rgba(148, 163, 184, 0.18) !important;
+    border-radius: 0 !important;
+    text-align: center;
+    box-shadow: none !important;
+}
+
+body.kmc-dark-theme .quantity-button {
+    border: 0;
+    color: #cfd6ff;
+    background: transparent;
+    font-family: var(--kmc-font-display);
+    font-size: 1.35rem;
+    transition: background 160ms ease, color 160ms ease;
+}
+
+body.kmc-dark-theme .quantity-button:hover {
+    color: #fff;
+    background: rgba(116, 132, 255, 0.14);
+}
+
+body.kmc-dark-theme .checkout-divider {
+    height: 1px;
+    margin: 2rem 0;
+    background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.28), transparent);
+}
+
+body.kmc-dark-theme .checkout-help-text {
+    margin-top: -0.35rem;
+    margin-bottom: 1.35rem;
+    color: #98a6bb !important;
+}
+
+body.kmc-dark-theme .checkout-form-card .form-label {
+    margin-bottom: 0.5rem;
+    color: #cbd5e5 !important;
+    font-family: var(--kmc-font-label);
+    font-size: 0.71rem;
+    font-weight: 750;
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+}
+
+body.kmc-dark-theme .checkout-form-card .form-control {
+    min-height: 50px;
+    color: #f8faff !important;
+    border: 1px solid rgba(148, 163, 184, 0.22) !important;
+    border-radius: 13px !important;
+    background: rgba(5, 10, 21, 0.82) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025) !important;
+}
+
+body.kmc-dark-theme .checkout-form-card .form-control::placeholder {
+    color: #52627a !important;
+}
+
+body.kmc-dark-theme .checkout-form-card .form-control:focus {
+    border-color: rgba(142, 154, 255, 0.74) !important;
+    box-shadow: 0 0 0 4px var(--kmc-checkout-glow) !important;
+}
+
+body.kmc-dark-theme .checkout-pay-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 58px;
+    padding: 0.75rem 1rem !important;
+    border-radius: 14px !important;
+    font-family: var(--kmc-font-display) !important;
+    font-size: 1rem;
+    font-weight: 750;
+    transition: transform 170ms ease, box-shadow 170ms ease;
+}
+
+body.kmc-dark-theme .checkout-pay-button small {
+    color: rgba(255, 255, 255, 0.72) !important;
+    font-family: var(--kmc-font-body);
+    font-size: 0.78rem;
+    font-weight: 550;
+}
+
+body.kmc-dark-theme .checkout-order-summary {
+    padding: 1.65rem !important;
+    border: 1px solid rgba(46, 211, 183, 0.19) !important;
+    border-radius: 22px !important;
+    background:
+        linear-gradient(155deg, rgba(18, 42, 58, 0.96), rgba(12, 24, 41, 0.98)) !important;
+    box-shadow: 0 24px 58px rgba(0, 0, 0, 0.28) !important;
+}
+
+body.kmc-dark-theme .checkout-order-summary h2 {
+    margin: 0.65rem 0 1.25rem;
+    font-size: clamp(1.45rem, 2.8vw, 2rem);
+    line-height: 1.08;
+}
+
+body.kmc-dark-theme .checkout-order-summary dl div {
+    align-items: flex-start;
+    padding: 0.9rem 0;
+}
+
+body.kmc-dark-theme .checkout-order-summary dt {
+    color: #90a6bb !important;
+}
+
+body.kmc-dark-theme .checkout-order-summary dd {
+    max-width: 62%;
+    color: #fff !important;
+}
+
+body.kmc-dark-theme .checkout-sync-message {
+    margin-top: 1.2rem;
+    padding: 1rem;
+    border: 1px solid rgba(46, 211, 183, 0.16);
+    border-radius: 14px;
+    background: rgba(46, 211, 183, 0.06);
+}
+
+body.kmc-dark-theme .checkout-sync-message strong {
+    color: #8ee9d6 !important;
+    font-size: 0.88rem;
+}
+
+body.kmc-dark-theme .checkout-sync-message p {
+    margin: 0.35rem 0 0;
+    color: #93a8bb !important;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+
+@media (max-width: 767.98px) {
+    body.kmc-dark-theme .checkout-hero h1 {
+        font-size: clamp(2.3rem, 13vw, 3.5rem) !important;
+        line-height: 1 !important;
+    }
+
+    body.kmc-dark-theme .checkout-section-heading,
+    body.kmc-dark-theme .checkout-pay-button {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    body.kmc-dark-theme .selected-ticket-panel {
+        grid-template-columns: 1fr;
+    }
+
+    body.kmc-dark-theme .checkout-field-block {
+        max-width: none;
+    }
+
+    body.kmc-dark-theme .checkout-pay-button {
+        gap: 0.15rem;
+    }
+}

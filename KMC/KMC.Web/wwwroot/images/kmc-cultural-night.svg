@@ -1,0 +1,31 @@
+<svg width="900" height="600" viewBox="0 0 900 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="900" y2="600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A1020"/>
+      <stop offset="1" stop-color="#101A34"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="120" y1="120" x2="780" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#15234A"/>
+      <stop offset="1" stop-color="#0B1328"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="600" rx="32" fill="url(#bg)"/>
+  <rect x="118" y="116" width="664" height="368" rx="30" fill="url(#panel)" stroke="#28447A" stroke-width="2"/>
+  <circle cx="220" cy="154" r="58" fill="#7C5CFC" fill-opacity="0.25"/>
+  <circle cx="676" cy="156" r="64" fill="#22D3EE" fill-opacity="0.24"/>
+  <circle cx="460" cy="132" r="48" fill="#FBBF24" fill-opacity="0.18"/>
+  <path d="M170 370C226 266 352 224 447 224C541 224 674 266 734 370" stroke="#1E355E" stroke-width="14" stroke-linecap="round"/>
+  <path d="M228 385C256 314 319 280 381 280C436 280 485 312 516 370" stroke="#7C5CFC" stroke-width="12" stroke-linecap="round"/>
+  <path d="M526 372C552 310 603 280 665 280" stroke="#22D3EE" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="384" cy="268" r="20" fill="#FBBF24"/>
+  <circle cx="622" cy="268" r="20" fill="#22D3EE"/>
+  <path d="M354 314C366 333 382 358 390 388" stroke="#FBBF24" stroke-width="10" stroke-linecap="round"/>
+  <path d="M414 314C402 333 386 358 378 388" stroke="#FBBF24" stroke-width="10" stroke-linecap="round"/>
+  <path d="M594 314C603 330 620 360 628 388" stroke="#22D3EE" stroke-width="10" stroke-linecap="round"/>
+  <path d="M650 314C640 330 624 360 616 388" stroke="#22D3EE" stroke-width="10" stroke-linecap="round"/>
+  <path d="M216 440C285 415 356 402 448 402C544 402 621 421 686 446" stroke="#253E70" stroke-width="16" stroke-linecap="round"/>
+  <rect x="202" y="158" width="160" height="14" rx="7" fill="#FBBF24"/>
+  <rect x="534" y="158" width="154" height="14" rx="7" fill="#22D3EE"/>
+  <text x="180" y="518" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Cultural nights that bring Kandy together</text>
+  <text x="180" y="554" fill="#95A6D9" font-family="Segoe UI, Arial, sans-serif" font-size="22">Traditional performances, festivals and community stories</text>
+</svg>

@@ -1,0 +1,727 @@
+/*
+ * KMC Event Platform — Refined Municipal Theme
+ * Restrained navy, teal and warm-gold palette for a cleaner civic website.
+ * Loaded last so it removes the previous rainbow/aurora presentation without
+ * changing any Razor markup, layouts or application behaviour.
+ */
+
+:root {
+    color-scheme: dark;
+    --civic-bg: #07111b;
+    --civic-bg-soft: #0a1621;
+    --civic-surface: #0f1e2b;
+    --civic-surface-raised: #132533;
+    --civic-surface-muted: #0c1924;
+    --civic-border: rgba(158, 184, 199, 0.16);
+    --civic-border-strong: rgba(73, 145, 161, 0.32);
+    --civic-text: #edf4f7;
+    --civic-text-soft: #c7d3da;
+    --civic-muted: #93a8b5;
+    --civic-primary: #2f7f91;
+    --civic-primary-hover: #3d91a3;
+    --civic-primary-soft: rgba(47, 127, 145, 0.14);
+    --civic-gold: #d4aa55;
+    --civic-gold-hover: #e0b968;
+    --civic-gold-soft: rgba(212, 170, 85, 0.13);
+    --civic-success: #4f9b7f;
+    --civic-warning: #c5954b;
+    --civic-danger: #b85f68;
+    --civic-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+    --civic-shadow-lg: 0 28px 68px rgba(0, 0, 0, 0.31);
+}
+
+html {
+    background: var(--civic-bg);
+}
+
+body.kmc-dark-theme {
+    color: var(--civic-text);
+    background:
+        radial-gradient(circle at 90% 6%, rgba(47, 127, 145, 0.075), transparent 30rem),
+        linear-gradient(145deg, #06101a 0%, #091622 48%, #07121b 100%);
+    background-attachment: fixed;
+}
+
+body.kmc-dark-theme::selection {
+    color: #07111b;
+    background: #d9b66d;
+}
+
+body.kmc-dark-theme .page-atmosphere {
+    opacity: 0.35;
+    background: none;
+}
+
+body.kmc-dark-theme .page-atmosphere::before,
+body.kmc-dark-theme .page-atmosphere::after {
+    opacity: 0.055;
+    filter: blur(110px);
+    animation: none;
+}
+
+body.kmc-dark-theme .page-atmosphere::before {
+    background: var(--civic-primary);
+}
+
+body.kmc-dark-theme .page-atmosphere::after {
+    background: var(--civic-gold);
+}
+
+body.kmc-dark-theme .site-main::before {
+    opacity: 0.018;
+    background-size: 88px 88px;
+}
+
+body.kmc-dark-theme h1,
+body.kmc-dark-theme h2,
+body.kmc-dark-theme h3,
+body.kmc-dark-theme h4,
+body.kmc-dark-theme h5,
+body.kmc-dark-theme h6,
+body.kmc-dark-theme .display-5,
+body.kmc-dark-theme .display-6,
+body.kmc-dark-theme .brand-copy strong {
+    color: var(--civic-text);
+    text-shadow: none;
+}
+
+body.kmc-dark-theme p,
+body.kmc-dark-theme small,
+body.kmc-dark-theme .text-muted,
+body.kmc-dark-theme .text-secondary,
+body.kmc-dark-theme .form-text {
+    color: var(--civic-muted) !important;
+}
+
+body.kmc-dark-theme a {
+    color: #78b9c7;
+}
+
+body.kmc-dark-theme a:hover {
+    color: #a8d1da;
+}
+
+/* Header and navigation */
+body.kmc-dark-theme .kmc-navbar {
+    background: rgba(6, 16, 26, 0.94);
+    border-bottom: 1px solid var(--civic-border);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+body.kmc-dark-theme .kmc-navbar.navbar-scrolled {
+    background: rgba(5, 14, 23, 0.98);
+    border-bottom-color: rgba(73, 145, 161, 0.22);
+    box-shadow: 0 15px 34px rgba(0, 0, 0, 0.3);
+}
+
+body.kmc-dark-theme .site-header::after {
+    height: 1px;
+    opacity: 0.5;
+    background: linear-gradient(90deg, transparent, rgba(73, 145, 161, 0.52), transparent);
+}
+
+body.kmc-dark-theme .brand-mark {
+    color: #0b1720;
+    background: var(--civic-gold);
+    border-color: rgba(255, 235, 194, 0.28);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
+body.kmc-dark-theme .brand-copy small {
+    color: #8fa5b2 !important;
+}
+
+body.kmc-dark-theme .kmc-nav-links .nav-link {
+    color: #aebdc6 !important;
+    background: transparent;
+}
+
+body.kmc-dark-theme .kmc-nav-links .nav-link::before {
+    display: none;
+}
+
+body.kmc-dark-theme .kmc-nav-links .nav-link:hover {
+    color: #eef5f7 !important;
+    background: rgba(255, 255, 255, 0.035);
+}
+
+body.kmc-dark-theme .kmc-nav-links .nav-link.active {
+    color: #f6fbfc !important;
+    background: var(--civic-primary-soft);
+    box-shadow: inset 0 0 0 1px rgba(73, 145, 161, 0.15);
+}
+
+body.kmc-dark-theme .kmc-nav-links .nav-link.active::after {
+    background: var(--civic-primary);
+    box-shadow: none;
+}
+
+body.kmc-dark-theme .user-chip {
+    background: rgba(15, 30, 43, 0.82);
+    border-color: var(--civic-border);
+    box-shadow: none;
+}
+
+body.kmc-dark-theme .user-avatar {
+    color: #07111b;
+    background: #cda453;
+    box-shadow: none;
+}
+
+body.kmc-dark-theme .role-pill,
+body.kmc-dark-theme .role-pill.role-organizer,
+body.kmc-dark-theme .role-pill.role-participant {
+    color: #dbe8ed;
+    background: rgba(73, 145, 161, 0.12);
+    border-color: rgba(73, 145, 161, 0.23);
+    box-shadow: none;
+}
+
+/* Buttons */
+body.kmc-dark-theme .btn {
+    border-radius: 10px;
+    box-shadow: none;
+    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+body.kmc-dark-theme .btn::after {
+    display: none;
+}
+
+body.kmc-dark-theme .btn:hover {
+    transform: translateY(-1px);
+}
+
+body.kmc-dark-theme .btn-primary,
+body.kmc-dark-theme .btn-dark,
+body.kmc-dark-theme .checkout-pay-button {
+    color: #f8fcfd !important;
+    background: var(--civic-primary) !important;
+    border-color: var(--civic-primary) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18) !important;
+}
+
+body.kmc-dark-theme .btn-primary:hover,
+body.kmc-dark-theme .btn-dark:hover,
+body.kmc-dark-theme .checkout-pay-button:hover {
+    color: #fff !important;
+    background: var(--civic-primary-hover) !important;
+    border-color: var(--civic-primary-hover) !important;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22) !important;
+}
+
+body.kmc-dark-theme .btn-kmc-gold {
+    color: #111b22 !important;
+    background: var(--civic-gold) !important;
+    border-color: var(--civic-gold) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18) !important;
+}
+
+body.kmc-dark-theme .btn-kmc-gold:hover {
+    color: #0b151c !important;
+    background: var(--civic-gold-hover) !important;
+    border-color: var(--civic-gold-hover) !important;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22) !important;
+}
+
+body.kmc-dark-theme .btn-nav-outline,
+body.kmc-dark-theme .btn-hero-outline,
+body.kmc-dark-theme .btn-outline-primary,
+body.kmc-dark-theme .btn-outline-secondary,
+body.kmc-dark-theme .btn-outline-dark {
+    color: #d4e0e5 !important;
+    background: transparent !important;
+    border-color: rgba(158, 184, 199, 0.27) !important;
+    box-shadow: none !important;
+}
+
+body.kmc-dark-theme .btn-nav-outline:hover,
+body.kmc-dark-theme .btn-hero-outline:hover,
+body.kmc-dark-theme .btn-outline-primary:hover,
+body.kmc-dark-theme .btn-outline-secondary:hover,
+body.kmc-dark-theme .btn-outline-dark:hover {
+    color: #f5fafb !important;
+    background: rgba(73, 145, 161, 0.13) !important;
+    border-color: rgba(89, 160, 175, 0.42) !important;
+    box-shadow: none !important;
+}
+
+body.kmc-dark-theme .btn-outline-success {
+    color: #94c8b5;
+    background: transparent;
+    border-color: rgba(79, 155, 127, 0.38);
+}
+
+body.kmc-dark-theme .btn-outline-success:hover {
+    color: #f4fbf8;
+    background: rgba(79, 155, 127, 0.18);
+    border-color: rgba(79, 155, 127, 0.55);
+}
+
+body.kmc-dark-theme .btn-outline-danger {
+    color: #e0a0a6;
+    background: transparent;
+    border-color: rgba(184, 95, 104, 0.42);
+}
+
+body.kmc-dark-theme .btn-outline-danger:hover {
+    color: #fff;
+    background: rgba(184, 95, 104, 0.22);
+    border-color: rgba(184, 95, 104, 0.6);
+}
+
+body.kmc-dark-theme .btn-nav-link {
+    color: #b7c5cc;
+}
+
+body.kmc-dark-theme .btn-nav-link:hover {
+    color: #f2f7f8;
+}
+
+/* Unified surfaces */
+body.kmc-dark-theme .card,
+body.kmc-dark-theme .event-preview-card,
+body.kmc-dark-theme .feature-card,
+body.kmc-dark-theme .about-card,
+body.kmc-dark-theme .empty-state-card,
+body.kmc-dark-theme .filter-panel,
+body.kmc-dark-theme .event-information-card,
+body.kmc-dark-theme .registration-panel,
+body.kmc-dark-theme .auth-shell,
+body.kmc-dark-theme .hero-showcase,
+body.kmc-dark-theme .dashboard-stat-card,
+body.kmc-dark-theme .organizer-event-card,
+body.kmc-dark-theme .participant-ticket-card,
+body.kmc-dark-theme .participant-portfolio-card,
+body.kmc-dark-theme .checkout-summary-card,
+body.kmc-dark-theme .checkout-payment-card,
+body.kmc-dark-theme .ticket-selection-card,
+body.kmc-dark-theme .role-command-card,
+body.kmc-dark-theme .role-feature-card,
+body.kmc-dark-theme .portfolio-event-card,
+body.kmc-dark-theme .city-card,
+body.kmc-dark-theme .status-card {
+    background: rgba(15, 30, 43, 0.9) !important;
+    border-color: var(--civic-border) !important;
+    box-shadow: var(--civic-shadow) !important;
+}
+
+body.kmc-dark-theme .card::before,
+body.kmc-dark-theme .event-preview-card::before,
+body.kmc-dark-theme .feature-card::before,
+body.kmc-dark-theme .organizer-event-card::before,
+body.kmc-dark-theme .participant-ticket-card::before,
+body.kmc-dark-theme .role-command-card::before,
+body.kmc-dark-theme .portfolio-event-card::before {
+    background: var(--civic-primary) !important;
+    opacity: 0.46;
+}
+
+body.kmc-dark-theme .glass-interactive::before {
+    display: none;
+}
+
+body.kmc-dark-theme .glass-interactive,
+body.kmc-dark-theme .event-preview-card,
+body.kmc-dark-theme .feature-card,
+body.kmc-dark-theme .organizer-event-card,
+body.kmc-dark-theme .participant-ticket-card,
+body.kmc-dark-theme .portfolio-event-card,
+body.kmc-dark-theme .role-feature-card {
+    transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+body.kmc-dark-theme .glass-interactive:hover,
+body.kmc-dark-theme .event-preview-card:hover,
+body.kmc-dark-theme .feature-card:hover,
+body.kmc-dark-theme .organizer-event-card:hover,
+body.kmc-dark-theme .participant-ticket-card:hover,
+body.kmc-dark-theme .portfolio-event-card:hover,
+body.kmc-dark-theme .role-feature-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--civic-border-strong) !important;
+    box-shadow: var(--civic-shadow-lg) !important;
+}
+
+/* Hero sections */
+body.kmc-dark-theme .home-hero,
+body.kmc-dark-theme .page-hero,
+body.kmc-dark-theme .organizer-hero,
+body.kmc-dark-theme .participant-hero,
+body.kmc-dark-theme .about-hero,
+body.kmc-dark-theme .role-home-hero,
+body.kmc-dark-theme .organizer-role-home,
+body.kmc-dark-theme .participant-role-home {
+    background:
+        radial-gradient(circle at 84% 16%, rgba(47, 127, 145, 0.13), transparent 27rem),
+        linear-gradient(115deg, #07131f 0%, #0d2130 58%, #0a1924 100%) !important;
+}
+
+body.kmc-dark-theme .home-hero h1,
+body.kmc-dark-theme .page-hero h1,
+body.kmc-dark-theme .organizer-hero h1,
+body.kmc-dark-theme .participant-hero h1,
+body.kmc-dark-theme .role-home-hero h1,
+body.kmc-dark-theme .about-hero h1 {
+    color: #f5f9fa;
+    text-shadow: none;
+}
+
+body.kmc-dark-theme .home-hero h1 em,
+body.kmc-dark-theme .home-hero h1 span,
+body.kmc-dark-theme .role-home-hero h1 span,
+body.kmc-dark-theme .participant-role-home h1 span,
+body.kmc-dark-theme .participant-hero h1 span {
+    color: #8dc4d0;
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    text-fill-color: currentColor;
+}
+
+body.kmc-dark-theme .eyebrow-pill,
+body.kmc-dark-theme .section-kicker,
+body.kmc-dark-theme .section-kicker-light,
+body.kmc-dark-theme .city-card-kicker,
+body.kmc-dark-theme .showcase-label,
+body.kmc-dark-theme .participant-role-home .eyebrow-pill,
+body.kmc-dark-theme .participant-hero .eyebrow-pill {
+    color: #bcd5dc;
+    background: rgba(47, 127, 145, 0.11);
+    border-color: rgba(73, 145, 161, 0.22);
+}
+
+body.kmc-dark-theme .eyebrow-dot,
+body.kmc-dark-theme .live-indicator,
+body.kmc-dark-theme .command-live i {
+    background: #5b9daf;
+    box-shadow: none;
+}
+
+body.kmc-dark-theme .hero-orb-one,
+body.kmc-dark-theme .role-home-orb-one,
+body.kmc-dark-theme .hero-orb-two,
+body.kmc-dark-theme .role-home-orb-two {
+    opacity: 0.2;
+    background: radial-gradient(circle, rgba(79, 145, 159, 0.16), transparent 68%);
+}
+
+/* Statistics and supporting components */
+body.kmc-dark-theme .dashboard-stat-card,
+body.kmc-dark-theme .showcase-stat,
+body.kmc-dark-theme .command-metric-grid > div,
+body.kmc-dark-theme .portfolio-event-metrics > div,
+body.kmc-dark-theme .ticket-record-grid > div,
+body.kmc-dark-theme .event-detail-list > div,
+body.kmc-dark-theme .event-detail-list-large > div,
+body.kmc-dark-theme .event-record-meta > div {
+    background: rgba(255, 255, 255, 0.025);
+    border-color: rgba(158, 184, 199, 0.12);
+}
+
+body.kmc-dark-theme .dashboard-stat-card:nth-child(n),
+body.kmc-dark-theme .showcase-stat:nth-child(n) {
+    border-top-color: rgba(73, 145, 161, 0.48) !important;
+}
+
+body.kmc-dark-theme .dashboard-money,
+body.kmc-dark-theme .command-money,
+body.kmc-dark-theme .ticket-total-chip,
+body.kmc-dark-theme .checkout-price-row strong {
+    color: #dcb963 !important;
+    text-shadow: none;
+}
+
+body.kmc-dark-theme .feature-icon,
+body.kmc-dark-theme .empty-state-icon,
+body.kmc-dark-theme .role-feature-index,
+body.kmc-dark-theme .role-cta-seal,
+body.kmc-dark-theme .feature-card:nth-child(n) .feature-icon,
+body.kmc-dark-theme .role-feature-card:nth-child(n) .role-feature-index {
+    color: #e7f0f3;
+    background: #234653;
+    border-color: rgba(111, 166, 178, 0.24);
+    box-shadow: none;
+}
+
+body.kmc-dark-theme .section-soft,
+body.kmc-dark-theme .professional-section-soft {
+    background: rgba(7, 17, 27, 0.42);
+    border-top-color: rgba(158, 184, 199, 0.08);
+    border-bottom-color: rgba(158, 184, 199, 0.08);
+}
+
+/* Events and tickets */
+body.kmc-dark-theme .event-preview-visual,
+body.kmc-dark-theme .city-card-pattern {
+    background:
+        linear-gradient(135deg, rgba(47, 127, 145, 0.48), rgba(18, 48, 65, 0.8));
+}
+
+body.kmc-dark-theme .event-type-pill,
+body.kmc-dark-theme .badge.bg-warning {
+    color: #1a211f !important;
+    background: #d3ad62 !important;
+    border-color: rgba(255, 238, 198, 0.2) !important;
+}
+
+body.kmc-dark-theme .badge.bg-success,
+body.kmc-dark-theme .status-confirmed {
+    color: #eef8f4 !important;
+    background: #427e69 !important;
+}
+
+body.kmc-dark-theme .badge.bg-secondary {
+    color: #e5edf1 !important;
+    background: #465966 !important;
+}
+
+body.kmc-dark-theme .badge.bg-danger {
+    color: #fff !important;
+    background: #a9545d !important;
+}
+
+body.kmc-dark-theme .event-date-tile {
+    color: #edf5f7;
+    background: #183644;
+    border-color: rgba(73, 145, 161, 0.3);
+}
+
+body.kmc-dark-theme .event-capacity-bar {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+body.kmc-dark-theme .event-capacity-bar > span,
+body.kmc-dark-theme .event-capacity-bar::after {
+    background: var(--civic-primary);
+}
+
+body.kmc-dark-theme .ticket-choice {
+    background: rgba(255, 255, 255, 0.025);
+    border-color: var(--civic-border);
+}
+
+body.kmc-dark-theme .ticket-choice:hover {
+    background: rgba(47, 127, 145, 0.08);
+    border-color: rgba(73, 145, 161, 0.35);
+}
+
+/* Forms */
+body.kmc-dark-theme .form-control,
+body.kmc-dark-theme .form-select,
+body.kmc-dark-theme .input-group-text {
+    color: #edf4f7;
+    background: #0a1722;
+    border-color: rgba(158, 184, 199, 0.2);
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+body.kmc-dark-theme .form-control::placeholder {
+    color: #6f8490;
+}
+
+body.kmc-dark-theme .form-control:focus,
+body.kmc-dark-theme .form-select:focus {
+    color: #f7fbfc;
+    background: #0b1924;
+    border-color: rgba(73, 145, 161, 0.7);
+    box-shadow: 0 0 0 0.2rem rgba(47, 127, 145, 0.13);
+}
+
+body.kmc-dark-theme .form-label {
+    color: #dce6ea;
+}
+
+body.kmc-dark-theme .form-select option {
+    color: #edf4f7;
+    background: #0d1d29;
+}
+
+body.kmc-dark-theme .ticket-tier-editor,
+body.kmc-dark-theme .ticket-builder,
+body.kmc-dark-theme .checkout-security-note,
+body.kmc-dark-theme .auth-benefit,
+body.kmc-dark-theme .checkout-event-summary,
+body.kmc-dark-theme .checkout-price-row {
+    background: rgba(255, 255, 255, 0.025);
+    border-color: rgba(158, 184, 199, 0.14);
+}
+
+/* Checkout and authentication */
+body.kmc-dark-theme .checkout-page,
+body.kmc-dark-theme .auth-page {
+    background:
+        radial-gradient(circle at 88% 12%, rgba(47, 127, 145, 0.08), transparent 28rem),
+        linear-gradient(180deg, rgba(5, 14, 23, 0.18), rgba(7, 17, 27, 0.44));
+}
+
+body.kmc-dark-theme .checkout-payment-card,
+body.kmc-dark-theme .checkout-summary-card {
+    border-color: var(--civic-border) !important;
+    box-shadow: var(--civic-shadow) !important;
+}
+
+body.kmc-dark-theme .auth-visual {
+    background:
+        radial-gradient(circle at 78% 20%, rgba(212, 170, 85, 0.1), transparent 20rem),
+        linear-gradient(145deg, #102a39, #0d202e 58%, #0c1a25);
+}
+
+body.kmc-dark-theme .auth-form-panel {
+    background: #0e1d29;
+}
+
+body.kmc-dark-theme .auth-switch a,
+body.kmc-dark-theme .clear-filter-link,
+body.kmc-dark-theme .checkout-back-link {
+    color: #83bcc8;
+}
+
+body.kmc-dark-theme .auth-switch a:hover,
+body.kmc-dark-theme .clear-filter-link:hover,
+body.kmc-dark-theme .checkout-back-link:hover {
+    color: #b3d5dc;
+}
+
+/* Tables */
+body.kmc-dark-theme .table {
+    --bs-table-bg: transparent;
+    --bs-table-color: #e4edf1;
+    --bs-table-border-color: rgba(158, 184, 199, 0.12);
+    --bs-table-hover-bg: rgba(47, 127, 145, 0.055);
+    --bs-table-hover-color: #f7fbfc;
+}
+
+body.kmc-dark-theme .table thead th {
+    color: #b7c7cf;
+    background: rgba(255, 255, 255, 0.025);
+    border-bottom-color: rgba(158, 184, 199, 0.2);
+}
+
+/* Alerts and validation */
+body.kmc-dark-theme .alert,
+body.kmc-dark-theme .modern-alert {
+    border-radius: 12px;
+    backdrop-filter: none;
+}
+
+body.kmc-dark-theme .alert-success {
+    color: #d9eee5;
+    background: rgba(79, 155, 127, 0.12);
+    border-color: rgba(79, 155, 127, 0.3);
+}
+
+body.kmc-dark-theme .alert-danger {
+    color: #f1d5d8;
+    background: rgba(184, 95, 104, 0.12);
+    border-color: rgba(184, 95, 104, 0.3);
+}
+
+body.kmc-dark-theme .alert-warning {
+    color: #f0e2c5;
+    background: rgba(197, 149, 75, 0.12);
+    border-color: rgba(197, 149, 75, 0.3);
+}
+
+body.kmc-dark-theme .alert-info {
+    color: #d5e8ed;
+    background: rgba(47, 127, 145, 0.12);
+    border-color: rgba(47, 127, 145, 0.3);
+}
+
+body.kmc-dark-theme .text-danger,
+body.kmc-dark-theme .field-validation-error,
+body.kmc-dark-theme .validation-summary-errors {
+    color: #df969e !important;
+}
+
+/* Footer */
+body.kmc-dark-theme .kmc-footer {
+    background: #06101a;
+    border-top: 1px solid var(--civic-border);
+}
+
+body.kmc-dark-theme .kmc-footer::before {
+    height: 1px;
+    opacity: 0.45;
+    background: linear-gradient(90deg, transparent, rgba(73, 145, 161, 0.45), transparent);
+}
+
+body.kmc-dark-theme .footer-assurance span {
+    color: #aebfc7;
+    background: rgba(255, 255, 255, 0.025);
+    border-color: rgba(158, 184, 199, 0.12);
+}
+
+body.kmc-dark-theme .footer-brand strong {
+    color: #edf4f7;
+}
+
+/* Fine details and accessibility */
+body.kmc-dark-theme :focus-visible {
+    outline: 3px solid rgba(92, 162, 178, 0.72);
+    outline-offset: 3px;
+}
+
+body.kmc-dark-theme .navbar-toggler {
+    border-color: rgba(158, 184, 199, 0.24);
+    background: rgba(255, 255, 255, 0.025);
+}
+
+body.kmc-dark-theme ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+}
+
+body.kmc-dark-theme ::-webkit-scrollbar-track {
+    background: #07111b;
+}
+
+body.kmc-dark-theme ::-webkit-scrollbar-thumb {
+    background: #284b59;
+    border: 3px solid #07111b;
+    border-radius: 999px;
+}
+
+body.kmc-dark-theme ::-webkit-scrollbar-thumb:hover {
+    background: #356474;
+}
+
+body.kmc-dark-theme hr {
+    border-color: rgba(158, 184, 199, 0.12);
+}
+
+body.kmc-dark-theme .transaction-reference {
+    color: #9db9c3;
+}
+
+@media (max-width: 1199.98px) {
+    body.kmc-dark-theme .navbar-collapse {
+        background: rgba(8, 19, 29, 0.99);
+        border-color: rgba(158, 184, 199, 0.16);
+        box-shadow: 0 22px 56px rgba(0, 0, 0, 0.38);
+    }
+}
+
+@media (max-width: 767.98px) {
+    body.kmc-dark-theme .role-home-hero,
+    body.kmc-dark-theme .page-hero,
+    body.kmc-dark-theme .home-hero {
+        background:
+            radial-gradient(circle at 88% 8%, rgba(47, 127, 145, 0.11), transparent 18rem),
+            linear-gradient(145deg, #07131f, #0b1d2a 60%, #081721) !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.kmc-dark-theme *,
+    body.kmc-dark-theme *::before,
+    body.kmc-dark-theme *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}

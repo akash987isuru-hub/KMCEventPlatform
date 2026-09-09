@@ -1,0 +1,39 @@
+<svg width="900" height="600" viewBox="0 0 900 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="900" y2="600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#091122"/>
+      <stop offset="1" stop-color="#101D3B"/>
+    </linearGradient>
+    <linearGradient id="phone" x1="180" y1="98" x2="420" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#182B58"/>
+      <stop offset="1" stop-color="#0D1733"/>
+    </linearGradient>
+    <linearGradient id="ticket" x1="490" y1="184" x2="748" y2="470" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#121E3F"/>
+      <stop offset="1" stop-color="#091224"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="600" rx="32" fill="url(#bg)"/>
+  <circle cx="234" cy="128" r="82" fill="#22D3EE" fill-opacity="0.18"/>
+  <circle cx="706" cy="120" r="72" fill="#7C5CFC" fill-opacity="0.2"/>
+  <rect x="174" y="92" width="256" height="414" rx="34" fill="url(#phone)" stroke="#36589A" stroke-width="2"/>
+  <rect x="194" y="122" width="216" height="330" rx="24" fill="#091224" stroke="#233F6C"/>
+  <rect x="214" y="154" width="176" height="16" rx="8" fill="#7C5CFC"/>
+  <rect x="214" y="186" width="118" height="12" rx="6" fill="#95A6D9" fill-opacity="0.8"/>
+  <rect x="214" y="228" width="176" height="84" rx="20" fill="#101934" stroke="#223A67"/>
+  <rect x="230" y="246" width="90" height="12" rx="6" fill="#22D3EE"/>
+  <rect x="230" y="274" width="140" height="10" rx="5" fill="#95A6D9" fill-opacity="0.7"/>
+  <rect x="230" y="336" width="160" height="68" rx="18" fill="#121F40" stroke="#29467B"/>
+  <rect x="248" y="355" width="126" height="18" rx="9" fill="#FBBF24"/>
+  <path d="M490 196H746V230C724 230 708 247 708 268C708 289 724 306 746 306V440H490V404C512 404 528 387 528 366C528 345 512 328 490 328V196Z" fill="url(#ticket)" stroke="#35558D" stroke-width="2"/>
+  <circle cx="490" cy="267" r="10" fill="#091224"/>
+  <circle cx="490" cy="367" r="10" fill="#091224"/>
+  <rect x="530" y="234" width="146" height="14" rx="7" fill="#F8FAFC" fill-opacity="0.96"/>
+  <rect x="530" y="262" width="86" height="12" rx="6" fill="#22D3EE"/>
+  <rect x="530" y="304" width="186" height="18" rx="9" fill="#7C5CFC" fill-opacity="0.88"/>
+  <rect x="530" y="338" width="110" height="12" rx="6" fill="#95A6D9" fill-opacity="0.78"/>
+  <rect x="530" y="364" width="98" height="12" rx="6" fill="#95A6D9" fill-opacity="0.62"/>
+  <rect x="530" y="392" width="144" height="18" rx="9" fill="#FBBF24"/>
+  <text x="174" y="558" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Secure booking, faster ticket access</text>
+  <text x="174" y="592" fill="#95A6D9" font-family="Segoe UI, Arial, sans-serif" font-size="22">Choose a category, pay securely and keep your ticket ready to print</text>
+</svg>

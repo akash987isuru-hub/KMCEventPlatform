@@ -1,0 +1,57 @@
+<svg width="900" height="600" viewBox="0 0 900 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="900" y2="600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1022"/>
+      <stop offset="1" stop-color="#131C3D"/>
+    </linearGradient>
+    <linearGradient id="stage" x1="180" y1="150" x2="680" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1C2955"/>
+      <stop offset="1" stop-color="#0F1731"/>
+    </linearGradient>
+    <linearGradient id="lightPurple" x1="160" y1="100" x2="520" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7C5CFC" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#7C5CFC" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="lightCyan" x1="600" y1="90" x2="760" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="blurGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+  </defs>
+  <rect width="900" height="600" rx="32" fill="url(#bg)"/>
+  <circle cx="195" cy="126" r="88" fill="url(#lightPurple)" filter="url(#blurGlow)"/>
+  <circle cx="706" cy="152" r="96" fill="url(#lightCyan)" filter="url(#blurGlow)"/>
+  <circle cx="430" cy="95" r="62" fill="#FBBF24" fill-opacity="0.24" filter="url(#blurGlow)"/>
+  <path d="M110 470C225 418 350 395 449 398C607 403 702 442 796 484V560H110V470Z" fill="#090D1D"/>
+  <rect x="176" y="168" width="548" height="214" rx="26" fill="url(#stage)" stroke="#31467D" stroke-width="2"/>
+  <rect x="212" y="197" width="170" height="118" rx="20" fill="#101833" stroke="#253A66"/>
+  <rect x="398" y="197" width="116" height="118" rx="20" fill="#111A35" stroke="#253A66"/>
+  <rect x="530" y="197" width="160" height="118" rx="20" fill="#101833" stroke="#253A66"/>
+  <rect x="232" y="214" width="132" height="12" rx="6" fill="#7C5CFC" fill-opacity="0.85"/>
+  <rect x="418" y="214" width="78" height="12" rx="6" fill="#22D3EE" fill-opacity="0.85"/>
+  <rect x="548" y="214" width="96" height="12" rx="6" fill="#FBBF24" fill-opacity="0.92"/>
+  <rect x="232" y="248" width="94" height="42" rx="14" fill="#0D1429" stroke="#2F4C7E"/>
+  <rect x="548" y="248" width="106" height="42" rx="14" fill="#0D1429" stroke="#2F4C7E"/>
+  <circle cx="256" cy="136" r="12" fill="#7C5CFC"/>
+  <circle cx="436" cy="122" r="12" fill="#FBBF24"/>
+  <circle cx="648" cy="134" r="12" fill="#22D3EE"/>
+  <path d="M196 152L238 194" stroke="#7C5CFC" stroke-width="8" stroke-linecap="round"/>
+  <path d="M276 152L238 194" stroke="#7C5CFC" stroke-width="8" stroke-linecap="round"/>
+  <path d="M616 152L658 194" stroke="#22D3EE" stroke-width="8" stroke-linecap="round"/>
+  <path d="M700 152L658 194" stroke="#22D3EE" stroke-width="8" stroke-linecap="round"/>
+  <path d="M394 140L456 194" stroke="#FBBF24" stroke-width="8" stroke-linecap="round"/>
+  <path d="M476 140L456 194" stroke="#FBBF24" stroke-width="8" stroke-linecap="round"/>
+  <g fill="#B9C5EE" fill-opacity="0.35">
+    <path d="M175 524C175 500 194 481 218 481H220C244 481 263 500 263 524V560H175V524Z"/>
+    <path d="M264 524C264 504 280 488 300 488H304C324 488 340 504 340 524V560H264V524Z"/>
+    <path d="M340 522C340 494 363 472 391 472C419 472 442 494 442 522V560H340V522Z"/>
+    <path d="M444 526C444 505 461 488 482 488H488C509 488 526 505 526 526V560H444V526Z"/>
+    <path d="M526 522C526 496 547 475 573 475C599 475 620 496 620 522V560H526V522Z"/>
+    <path d="M622 524C622 503 639 486 660 486H665C686 486 703 503 703 524V560H622V524Z"/>
+  </g>
+  <rect x="214" y="342" width="470" height="18" rx="9" fill="#7C5CFC" fill-opacity="0.22"/>
+  <text x="214" y="120" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Live city experiences</text>
+  <text x="214" y="390" fill="#95A6D9" font-family="Segoe UI, Arial, sans-serif" font-size="22">Music • Culture • Learning • Community</text>
+</svg>

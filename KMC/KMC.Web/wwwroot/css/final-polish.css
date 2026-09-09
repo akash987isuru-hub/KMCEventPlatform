@@ -1,0 +1,100 @@
+/* Final KMC industry-ready dark interface polish */
+:root {
+    --kmc-aurora: #5ce1c2;
+    --kmc-violet: #8993ff;
+    --kmc-coral: #ff7d92;
+    --kmc-amber: #ffc65b;
+    --kmc-cyan: #66d8ff;
+}
+
+body.kmc-dark-theme {
+    color: #edf3ff;
+    background:
+        radial-gradient(circle at 8% 18%, rgba(77, 104, 255, .09), transparent 28rem),
+        radial-gradient(circle at 92% 72%, rgba(36, 211, 176, .065), transparent 31rem),
+        linear-gradient(180deg, #050a14 0%, #07101d 48%, #050a14 100%) !important;
+}
+
+body.kmc-dark-theme .site-main { position: relative; isolation: isolate; }
+body.kmc-dark-theme .site-main::before {
+    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .2;
+    background-image: linear-gradient(rgba(125,145,181,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(125,145,181,.055) 1px, transparent 1px);
+    background-size: 64px 64px; mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 75%, transparent);
+}
+
+body.kmc-dark-theme .dashboard-stat-card,
+body.kmc-dark-theme .organizer-event-card,
+body.kmc-dark-theme .participant-ticket-card,
+body.kmc-dark-theme .modern-form-card,
+body.kmc-dark-theme .partner-order-summary {
+    transform: translateZ(0);
+    transition: transform .24s ease, border-color .24s ease, box-shadow .24s ease;
+}
+body.kmc-dark-theme .dashboard-stat-card:hover,
+body.kmc-dark-theme .organizer-event-card:hover,
+body.kmc-dark-theme .participant-ticket-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(125, 145, 255, .5) !important;
+    box-shadow: 0 24px 58px rgba(0, 0, 0, .32), 0 0 0 1px rgba(125,145,255,.08) !important;
+}
+
+body.kmc-dark-theme .organizer-metrics-row > div { animation: kmc-rise-in .55s both cubic-bezier(.2,.75,.2,1); }
+body.kmc-dark-theme .organizer-metrics-row > div:nth-child(2) { animation-delay: .08s; }
+body.kmc-dark-theme .organizer-metrics-row > div:nth-child(3) { animation-delay: .16s; }
+body.kmc-dark-theme .dashboard-stat-card { position: relative; min-height: 142px; overflow: hidden; }
+body.kmc-dark-theme .dashboard-stat-card::after { content:""; position:absolute; width:8rem; height:8rem; right:-3rem; bottom:-4rem; border-radius:50%; filter:blur(4px); opacity:.16; background:currentColor; }
+body.kmc-dark-theme .dashboard-stat-card small { display:block; margin-top:auto; color:#8595af !important; font-size:.76rem; }
+body.kmc-dark-theme .stat-events { color: var(--kmc-cyan); }
+body.kmc-dark-theme .stat-published { color: var(--kmc-aurora); }
+body.kmc-dark-theme .stat-revenue { color: var(--kmc-amber); }
+body.kmc-dark-theme .stat-revenue .dashboard-money { color:#ffd47b !important; font-size:clamp(1.75rem,3vw,2.45rem) !important; font-variant-numeric:tabular-nums; }
+body.kmc-dark-theme .revenue-sync-note { margin:-1.8rem 0 2.2rem; padding:.75rem 1rem; border:1px solid rgba(255,198,91,.25); border-radius:12px; color:#f5cf87; background:rgba(255,198,91,.065); font-size:.84rem; }
+
+body.kmc-dark-theme .card-number-shell { position:relative; }
+body.kmc-dark-theme .card-number-input { padding-right:8.2rem !important; font-family:"Cascadia Code",Consolas,monospace !important; font-size:1.02rem; letter-spacing:.07em; font-variant-numeric:tabular-nums; }
+body.kmc-dark-theme .card-group-guide { position:absolute; top:50%; right:.7rem; display:flex; gap:.28rem; transform:translateY(-50%); pointer-events:none; }
+body.kmc-dark-theme .card-group-guide i { display:grid; place-items:center; width:1.55rem; height:1.55rem; border:1px solid rgba(137,147,255,.2); border-radius:.42rem; color:#73809a; background:rgba(137,147,255,.06); font:700 .62rem/1 "Cascadia Code",monospace; }
+body.kmc-dark-theme .field-hint { display:block; margin-top:.42rem; color:#75869f; font-size:.76rem; }
+
+body.kmc-dark-theme .ticket-ready-hero { background: radial-gradient(circle at 78% 20%,rgba(92,225,194,.14),transparent 25rem),linear-gradient(130deg,#08101f,#101c37 60%,#091421) !important; }
+body.kmc-dark-theme .partner-ticket-confirmation { padding-block:clamp(2.5rem,6vw,5rem) !important; }
+body.kmc-dark-theme .kmc-partner-ticket { position:relative; max-width:920px; margin:0 auto 1.7rem; padding:clamp(1.4rem,4vw,2.4rem); overflow:hidden; border:1px solid rgba(133,153,190,.3) !important; border-radius:26px; color:#eaf1ff !important; background:linear-gradient(145deg,rgba(19,31,53,.98),rgba(7,15,28,.99)) !important; box-shadow:0 32px 85px rgba(0,0,0,.42) !important; }
+body.kmc-dark-theme .kmc-partner-ticket::before { content:""; position:absolute; inset:0 0 auto; height:5px; background:linear-gradient(90deg,var(--kmc-aurora),var(--kmc-violet),var(--kmc-amber)); }
+body.kmc-dark-theme .ticket-confirmation-head { display:flex; justify-content:space-between; gap:1rem; padding-bottom:1.15rem; border-bottom:1px dashed rgba(151,169,201,.32) !important; }
+body.kmc-dark-theme .ticket-confirmation-head span { color:#75e3ca !important; font-family:var(--kmc-font-label); font-size:.71rem; letter-spacing:.12em; text-transform:uppercase; }
+body.kmc-dark-theme .ticket-confirmation-head strong { color:#b9c7ff !important; overflow-wrap:anywhere; }
+body.kmc-dark-theme .ticket-title-row { display:flex; justify-content:space-between; gap:1.5rem; align-items:flex-start; padding:1.6rem 0 .4rem; }
+body.kmc-dark-theme .ticket-title-row h2 { margin:.45rem 0 .55rem; color:#fff !important; font-size:clamp(1.8rem,4vw,3.25rem); }
+body.kmc-dark-theme .ticket-title-row p { color:#9cabc1 !important; }
+body.kmc-dark-theme .ticket-status-pill { padding:.48rem .78rem; border:1px solid; border-radius:999px; font:800 .72rem/1 var(--kmc-font-label); letter-spacing:.07em; text-transform:uppercase; }
+body.kmc-dark-theme .ticket-status-pill.confirmed { color:#70e5c8; border-color:rgba(92,225,194,.35); background:rgba(92,225,194,.08); }
+body.kmc-dark-theme .ticket-status-pill.cancelled { color:#ff96a6; border-color:rgba(255,125,146,.35); background:rgba(255,125,146,.08); }
+body.kmc-dark-theme .ticket-confirmation-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.85rem; margin-top:1.25rem; }
+body.kmc-dark-theme .ticket-confirmation-grid>div { min-height:104px; padding:1rem; border:1px solid rgba(139,159,193,.18); border-radius:15px; background:rgba(3,9,19,.55) !important; }
+body.kmc-dark-theme .ticket-confirmation-grid span { color:#7689a5 !important; }
+body.kmc-dark-theme .ticket-confirmation-grid strong { color:#f7f9ff !important; overflow-wrap:anywhere; }
+body.kmc-dark-theme .ticket-entry-note { display:flex; align-items:center; gap:.8rem; margin-top:1.2rem; padding:1rem; border:1px solid rgba(92,225,194,.2); border-radius:14px; color:#a9eadb; background:rgba(92,225,194,.055); }
+body.kmc-dark-theme .ticket-entry-note span { display:grid; place-items:center; flex:0 0 2rem; height:2rem; border-radius:50%; color:#061612; background:#62dfc2; font-weight:900; }
+body.kmc-dark-theme .ticket-entry-note p { margin:0; }
+body.kmc-dark-theme .ticket-action-bar { display:flex; justify-content:center; flex-wrap:wrap; gap:.75rem; }
+
+body.kmc-dark-theme .participant-ticket-card .btn-outline-info { color:#73dfff !important; border-color:rgba(102,216,255,.4) !important; background:rgba(102,216,255,.05) !important; }
+body.kmc-dark-theme .participant-ticket-card .btn-outline-info:hover { color:#06111a !important; background:#66d8ff !important; }
+
+body.kmc-dark-theme .form-control, body.kmc-dark-theme .form-select { transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease; }
+body.kmc-dark-theme .form-control:focus, body.kmc-dark-theme .form-select:focus { transform:translateY(-1px); }
+body.kmc-dark-theme .btn { transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease,background-color .18s ease; }
+body.kmc-dark-theme .btn:hover { transform:translateY(-2px); }
+
+@keyframes kmc-rise-in { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+@media(max-width:767.98px){ body.kmc-dark-theme .ticket-title-row{flex-direction:column} body.kmc-dark-theme .ticket-confirmation-grid{grid-template-columns:1fr} body.kmc-dark-theme .card-number-input{padding-right:1rem!important} body.kmc-dark-theme .card-group-guide{display:none} }
+@media(prefers-reduced-motion:reduce){ *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important} }
+@media print {
+    body.kmc-dark-theme { background:#fff !important; color:#111 !important; }
+    body.kmc-dark-theme header, body.kmc-dark-theme footer, body.kmc-dark-theme .page-hero, body.kmc-dark-theme .ticket-action-bar, body.kmc-dark-theme .alert { display:none !important; }
+    body.kmc-dark-theme .partner-ticket-confirmation { padding:0 !important; }
+    body.kmc-dark-theme .kmc-partner-ticket { max-width:none; border:1px solid #111 !important; border-radius:0; color:#111 !important; background:#fff !important; box-shadow:none !important; }
+    body.kmc-dark-theme .ticket-title-row h2, body.kmc-dark-theme .ticket-confirmation-grid strong, body.kmc-dark-theme .ticket-confirmation-head strong { color:#111 !important; }
+    body.kmc-dark-theme .ticket-title-row p, body.kmc-dark-theme .ticket-confirmation-grid span { color:#475569 !important; }
+    body.kmc-dark-theme .ticket-confirmation-grid>div { border-color:#cbd5e1; background:#fff !important; }
+}

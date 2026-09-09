@@ -1,0 +1,786 @@
+:root {
+    --kmc-bg-main: #070b1a;
+    --kmc-bg-elevated: #0c1429;
+    --kmc-bg-card: #101a33;
+    --kmc-bg-card-2: #142041;
+    --kmc-bg-glass: rgba(16, 26, 51, 0.72);
+    --kmc-text-primary: #f8fbff;
+    --kmc-text-secondary: #9fb2d3;
+    --kmc-border-strong: rgba(97, 124, 185, 0.34);
+    --kmc-border-soft: rgba(125, 157, 222, 0.16);
+
+    --kmc-purple: #7c5cfc;
+    --kmc-purple-2: #9b87ff;
+    --kmc-cyan: #22d3ee;
+    --kmc-cyan-soft: rgba(34, 211, 238, 0.18);
+    --kmc-yellow: #fbbf24;
+    --kmc-yellow-soft: rgba(251, 191, 36, 0.18);
+    --kmc-green: #34d399;
+    --kmc-green-soft: rgba(52, 211, 153, 0.18);
+    --kmc-red: #fb7185;
+    --kmc-red-soft: rgba(251, 113, 133, 0.16);
+
+    --kmc-shadow-colorful: 0 22px 55px rgba(6, 8, 18, 0.5);
+    --kmc-shadow-purple: 0 14px 34px rgba(124, 92, 252, 0.18);
+    --kmc-shadow-cyan: 0 14px 34px rgba(34, 211, 238, 0.16);
+}
+
+html {
+    scroll-padding-top: 92px;
+}
+
+body.kmc-dark-theme {
+    color: var(--kmc-text-primary);
+    background:
+        radial-gradient(circle at 12% 8%, rgba(124, 92, 252, 0.18), transparent 28%),
+        radial-gradient(circle at 86% 16%, rgba(34, 211, 238, 0.12), transparent 26%),
+        radial-gradient(circle at 50% 100%, rgba(251, 191, 36, 0.08), transparent 22%),
+        linear-gradient(180deg, #050914 0%, #060b17 42%, #07101e 100%);
+    font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.page-atmosphere {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+        radial-gradient(circle at 20% 10%, rgba(124, 92, 252, 0.08), transparent 22%),
+        radial-gradient(circle at 80% 12%, rgba(34, 211, 238, 0.06), transparent 20%),
+        radial-gradient(circle at 50% 80%, rgba(251, 191, 36, 0.05), transparent 20%);
+    animation: atmosphereDrift 16s ease-in-out infinite alternate;
+}
+
+@keyframes atmosphereDrift {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to { transform: translate3d(0, -12px, 0) scale(1.02); }
+}
+
+h1, h2, h3, h4, h5, h6,
+.display-1, .display-2, .display-3 {
+    color: var(--kmc-text-primary) !important;
+    letter-spacing: -0.045em;
+}
+
+.text-muted,
+.text-secondary {
+    color: var(--kmc-text-secondary) !important;
+}
+
+p, li, label, small, span, .form-text {
+    color: inherit;
+}
+
+a,
+.text-info,
+.clear-filter-link,
+.text-link,
+.role-feature-card a,
+.event-card-footer a,
+.footer-assurance span,
+.connected-sync-note span,
+.connected-source-badge,
+.partner-source-pill {
+    color: var(--kmc-cyan) !important;
+}
+
+a:hover,
+.clear-filter-link:hover,
+.text-link:hover,
+.role-feature-card a:hover,
+.event-card-footer a:hover {
+    color: #73ebff !important;
+}
+
+.kmc-navbar {
+    background:
+        linear-gradient(135deg, rgba(8, 12, 26, 0.95), rgba(10, 16, 33, 0.92));
+    border-bottom: 1px solid rgba(124, 92, 252, 0.18);
+    box-shadow: 0 18px 45px rgba(1, 4, 12, 0.6);
+}
+
+.kmc-brand,
+.brand-copy strong,
+.kmc-nav-links .nav-link,
+.user-chip,
+.user-chip-copy strong,
+.footer-brand strong,
+.footer-meta span {
+    color: var(--kmc-text-primary) !important;
+}
+
+.brand-mark,
+.user-avatar,
+.empty-state-icon,
+.empty-state-symbol,
+.command-live i,
+.trust-check,
+.hero-badge-icon {
+    background: linear-gradient(135deg, var(--kmc-yellow), #ffd978) !important;
+    color: #140d00 !important;
+    box-shadow: 0 12px 24px rgba(251, 191, 36, 0.22);
+}
+
+.kmc-nav-links .nav-link {
+    color: rgba(248, 251, 255, 0.76) !important;
+    transition: transform .18s ease, color .18s ease, background-color .18s ease, box-shadow .18s ease;
+}
+
+.kmc-nav-links .nav-link:hover,
+.kmc-nav-links .nav-link.active {
+    color: #fff !important;
+    background: rgba(124, 92, 252, 0.17) !important;
+    box-shadow: inset 0 0 0 1px rgba(124, 92, 252, 0.25);
+    transform: translateY(-1px);
+}
+
+.kmc-nav-links .nav-link.active::after {
+    background: linear-gradient(90deg, var(--kmc-purple), var(--kmc-cyan)) !important;
+    height: 3px !important;
+}
+
+.user-chip {
+    background: linear-gradient(135deg, rgba(17, 26, 50, 0.86), rgba(14, 22, 42, 0.8));
+    border-color: rgba(34, 211, 238, 0.2);
+}
+
+.role-pill.role-organizer,
+.role-pill.role-participant {
+    background: rgba(124, 92, 252, 0.18) !important;
+    color: #e6e0ff !important;
+    border: 1px solid rgba(124, 92, 252, 0.24);
+}
+
+.kmc-footer {
+    background: linear-gradient(180deg, rgba(5, 8, 17, 0.92), rgba(7, 11, 26, 0.98));
+    border-top: 1px solid rgba(34, 211, 238, 0.12);
+}
+
+.footer-assurance span {
+    background: rgba(124, 92, 252, 0.12);
+    border: 1px solid rgba(124, 92, 252, 0.18);
+}
+
+.btn,
+button,
+.form-control,
+.form-select,
+textarea {
+    border-radius: 16px !important;
+}
+
+.btn-kmc-gold,
+.btn-primary,
+.btn-dark,
+.btn.btn-dark,
+.btn.btn-primary,
+button.btn-dark,
+button.btn-primary {
+    color: #fff !important;
+    background: linear-gradient(135deg, var(--kmc-purple), var(--kmc-purple-2)) !important;
+    border-color: rgba(160, 144, 255, 0.32) !important;
+    box-shadow: var(--kmc-shadow-purple);
+}
+
+.btn-kmc-gold:hover,
+.btn-primary:hover,
+.btn-dark:hover,
+.btn.btn-dark:hover,
+.btn.btn-primary:hover,
+button.btn-dark:hover,
+button.btn-primary:hover {
+    background: linear-gradient(135deg, #6c4ff0, #8b78ff) !important;
+    transform: translateY(-1px);
+}
+
+.btn-hero-outline,
+.btn-outline-dark,
+.btn-outline-primary,
+.btn-outline-info {
+    color: var(--kmc-cyan) !important;
+    background: rgba(34, 211, 238, 0.06) !important;
+    border-color: rgba(34, 211, 238, 0.34) !important;
+    box-shadow: var(--kmc-shadow-cyan);
+}
+
+.btn-hero-outline:hover,
+.btn-outline-dark:hover,
+.btn-outline-primary:hover,
+.btn-outline-info:hover {
+    color: #04131a !important;
+    background: var(--kmc-cyan) !important;
+}
+
+.btn-outline-success,
+.btn-success {
+    color: #dbfff0 !important;
+    background: rgba(52, 211, 153, 0.12) !important;
+    border-color: rgba(52, 211, 153, 0.36) !important;
+}
+
+.btn-outline-success:hover,
+.btn-success:hover {
+    color: #042314 !important;
+    background: var(--kmc-green) !important;
+}
+
+.btn-outline-danger,
+.btn-danger,
+.btn-nav-outline,
+button[type="submit"].btn-outline-danger {
+    color: #ffd9df !important;
+    background: rgba(251, 113, 133, 0.08) !important;
+    border-color: rgba(251, 113, 133, 0.36) !important;
+}
+
+.btn-outline-danger:hover,
+.btn-danger:hover,
+.btn-nav-outline:hover,
+button[type="submit"].btn-outline-danger:hover {
+    color: #17070a !important;
+    background: var(--kmc-red) !important;
+}
+
+.card,
+.about-card,
+.role-feature-card,
+.role-command-card,
+.event-preview-card,
+.organizer-event-card,
+.dashboard-stat-card,
+.empty-state-card,
+.filter-panel,
+.modern-card,
+.role-cta,
+.command-next-event,
+.order-summary-card,
+.checkout-card,
+.checkout-summary-card,
+.partner-ticket-card,
+.about-visual-card,
+.discovery-strip,
+.info-highlight,
+.showcase-stat,
+.city-card {
+    color: var(--kmc-text-primary);
+    background:
+        linear-gradient(180deg, rgba(16, 26, 51, 0.92), rgba(10, 18, 36, 0.96)) !important;
+    border: 1px solid var(--kmc-border-soft) !important;
+    box-shadow: var(--kmc-shadow-colorful);
+}
+
+.card:hover,
+.about-card:hover,
+.role-feature-card:hover,
+.event-preview-card:hover,
+.organizer-event-card:hover,
+.dashboard-stat-card:hover,
+.discovery-visual-card:hover,
+.about-visual-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(124, 92, 252, 0.34) !important;
+    box-shadow: 0 28px 58px rgba(4, 8, 17, 0.55), 0 0 0 1px rgba(124, 92, 252, 0.12);
+}
+
+.event-preview-card,
+.organizer-event-card,
+.role-feature-card,
+.about-card,
+.dashboard-stat-card,
+.about-visual-card,
+.discovery-visual-card,
+.hero-visual-card,
+.showcase-stat,
+.city-card {
+    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+
+.home-hero,
+.role-home-hero,
+.page-hero,
+.about-hero {
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(135deg, rgba(9, 13, 28, 0.96), rgba(10, 18, 40, 0.86)),
+        linear-gradient(90deg, rgba(124, 92, 252, 0.08), rgba(34, 211, 238, 0.06));
+    border-bottom: 1px solid rgba(124, 92, 252, 0.14);
+}
+
+.home-hero::before,
+.role-home-hero::before,
+.page-hero::before,
+.about-hero::before {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background:
+        radial-gradient(circle at 18% 15%, rgba(124, 92, 252, 0.18), transparent 21%),
+        radial-gradient(circle at 82% 18%, rgba(34, 211, 238, 0.16), transparent 22%),
+        linear-gradient(120deg, transparent 0%, rgba(251, 191, 36, 0.03) 48%, transparent 100%);
+    opacity: 0.92;
+}
+
+
+.home-hero::after,
+.participant-role-home::after,
+.organizer-role-home::after,
+.about-hero::after {
+    position: absolute;
+    right: clamp(-80px, -3vw, 0px);
+    top: 80px;
+    width: min(34vw, 380px);
+    height: min(34vw, 380px);
+    content: "";
+    opacity: 0.16;
+    pointer-events: none;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: saturate(1.1) drop-shadow(0 24px 42px rgba(6, 8, 18, 0.35));
+}
+
+.home-hero::after {
+    background-image: url('/images/kmc-community-ticket.svg');
+}
+
+.participant-role-home::after {
+    background-image: url('/images/kmc-ticket-experience.svg');
+}
+
+.organizer-role-home::after {
+    background-image: url('/images/kmc-hero-stage.svg');
+}
+
+.about-hero::after {
+    background-image: url('/images/kmc-cultural-night.svg');
+    opacity: 0.14;
+}
+
+.hero-copy,
+.hero-showcase,
+.role-command-card,
+.page-hero-row,
+.about-hero-layout,
+.discovery-strip {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-lead,
+.role-home-lead,
+.page-hero p,
+.about-hero p,
+.section-heading p,
+.professional-section-heading p {
+    color: #bfd0eb !important;
+}
+
+.hero-showcase {
+    border: 1px solid rgba(34, 211, 238, 0.16);
+    background:
+        linear-gradient(180deg, rgba(17, 28, 56, 0.88), rgba(10, 18, 35, 0.95)) !important;
+    box-shadow: var(--kmc-shadow-colorful);
+}
+
+.showcase-label,
+.section-kicker,
+.eyebrow-pill,
+.eyebrow-pill small,
+.command-card-head span,
+.filter-panel-heading span,
+.discovery-copy .section-kicker,
+.about-visual-kicker {
+    color: #dfe5ff !important;
+}
+
+.eyebrow-pill,
+.section-kicker,
+.about-visual-kicker {
+    background: rgba(124, 92, 252, 0.12);
+    border: 1px solid rgba(124, 92, 252, 0.24);
+}
+
+.eyebrow-dot,
+.section-kicker::before {
+    background: var(--kmc-cyan) !important;
+    box-shadow: 0 0 0 5px rgba(34, 211, 238, 0.14);
+}
+
+.trust-item,
+.role-home-trust span,
+.command-next-event,
+.hero-trust-row,
+.professional-empty,
+.revenue-sync-note,
+.connected-sync-note,
+.discovery-copy,
+.about-visual-caption {
+    background: rgba(11, 20, 39, 0.58);
+    border: 1px solid rgba(124, 92, 252, 0.15);
+}
+
+.hero-visual-grid,
+.about-visual-collage,
+.discovery-visual-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.hero-visual-grid {
+    grid-template-columns: 1.25fr 0.75fr;
+    margin-top: 1.35rem;
+}
+
+.hero-visual-grid .hero-visual-card:first-child {
+    grid-row: span 2;
+}
+
+figure.hero-visual-card,
+figure.about-visual-card,
+figure.discovery-visual-card {
+    margin: 0;
+}
+
+.hero-visual-card,
+.about-visual-card,
+.discovery-visual-card {
+    overflow: hidden;
+    border-radius: 24px;
+    border: 1px solid rgba(124, 92, 252, 0.18);
+    background: linear-gradient(180deg, rgba(17, 28, 55, 0.92), rgba(10, 18, 35, 0.95));
+}
+
+.hero-visual-card img,
+.about-visual-card img,
+.discovery-visual-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-visual-card {
+    min-height: 155px;
+}
+
+.about-hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 430px);
+    gap: 2rem;
+    align-items: center;
+}
+
+.about-visual-collage {
+    grid-template-columns: 1fr;
+}
+
+.about-visual-card {
+    min-height: 200px;
+}
+
+.about-visual-caption {
+    margin-top: 1rem;
+    padding: 1rem 1.15rem;
+    border-radius: 18px;
+}
+
+.discovery-strip {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+    gap: 1.5rem;
+    padding: 1.4rem;
+    border-radius: 28px;
+    margin: 2rem 0 2.25rem;
+}
+
+.discovery-visual-grid {
+    grid-template-columns: 1fr 1fr;
+}
+
+.discovery-visual-grid .discovery-visual-card:first-child {
+    grid-column: span 2;
+    min-height: 180px;
+}
+
+.discovery-visual-card {
+    min-height: 135px;
+}
+
+.discovery-copy {
+    padding: 1rem;
+    border-radius: 22px;
+}
+
+.event-preview-visual,
+.partner-event-visual,
+.portfolio-event-top,
+.organizer-hero,
+.participant-role-home,
+.organizer-role-home {
+    background:
+        linear-gradient(135deg, rgba(124, 92, 252, 0.12), rgba(34, 211, 238, 0.08)),
+        linear-gradient(180deg, rgba(16, 27, 53, 0.96), rgba(13, 21, 42, 0.95)) !important;
+}
+
+.event-preview-visual {
+    background-image:
+        linear-gradient(135deg, rgba(124, 92, 252, 0.14), rgba(34, 211, 238, 0.1)),
+        url('/images/kmc-community-ticket.svg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+.partner-event-visual {
+    background-image:
+        linear-gradient(135deg, rgba(34, 211, 238, 0.12), rgba(124, 92, 252, 0.12)),
+        url('/images/kmc-cultural-night.svg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+.hero-orb,
+.role-home-orb,
+.city-card-pattern,
+.event-preview-pattern {
+    opacity: .9 !important;
+}
+
+.city-card-pattern,
+.event-preview-pattern {
+    background:
+        radial-gradient(circle at 20% 20%, rgba(124, 92, 252, 0.18), transparent 22%),
+        radial-gradient(circle at 80% 35%, rgba(34, 211, 238, 0.14), transparent 28%),
+        repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0 8px, transparent 8px 18px) !important;
+}
+
+.event-type-pill,
+.badge.bg-warning,
+.role-feature-index,
+.page-hero-stat strong,
+.city-card-kicker,
+.ticket-visual-pill {
+    color: #1c1000 !important;
+    background: linear-gradient(135deg, var(--kmc-yellow), #ffd15d) !important;
+}
+
+.badge.bg-success,
+.status-confirmed,
+.status-approved {
+    color: #052515 !important;
+    background: linear-gradient(135deg, #34d399, #6ee7b7) !important;
+}
+
+.badge.bg-danger,
+.status-cancelled,
+.status-failed {
+    color: #2c0812 !important;
+    background: linear-gradient(135deg, #fb7185, #fda4af) !important;
+}
+
+.badge.bg-secondary,
+.connected-source-badge,
+.partner-source-pill {
+    color: #d9ffff !important;
+    background: rgba(34, 211, 238, 0.16) !important;
+    border: 1px solid rgba(34, 211, 238, 0.28);
+}
+
+.ticket-price,
+.price-highlight,
+.event-card-footer span,
+.dashboard-money,
+.command-money,
+.order-summary-value,
+.checkout-price,
+.ticket-price-value,
+.feature-price,
+.form-price,
+.kpi-value-money {
+    color: var(--kmc-yellow) !important;
+}
+
+.dashboard-stat-card strong,
+.showcase-stat strong,
+.command-metric-grid strong,
+.event-date-tile strong,
+.role-home-trust strong,
+.page-hero-stat strong,
+.tier-name,
+.kpi-value,
+.value-display {
+    color: var(--kmc-text-primary) !important;
+}
+
+.dashboard-stat-card {
+    min-height: 168px;
+}
+
+.stat-events {
+    border-color: rgba(124, 92, 252, 0.28) !important;
+}
+
+.stat-published {
+    border-color: rgba(52, 211, 153, 0.28) !important;
+}
+
+.stat-revenue {
+    border-color: rgba(251, 191, 36, 0.32) !important;
+}
+
+.form-control,
+.form-select,
+textarea,
+input,
+select {
+    color: var(--kmc-text-primary) !important;
+    background: rgba(9, 15, 30, 0.88) !important;
+    border: 1px solid rgba(124, 92, 252, 0.2) !important;
+    box-shadow: none !important;
+}
+
+.form-control::placeholder,
+textarea::placeholder,
+input::placeholder {
+    color: rgba(176, 191, 224, 0.58) !important;
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea:focus,
+input:focus,
+select:focus {
+    color: #fff !important;
+    border-color: rgba(34, 211, 238, 0.52) !important;
+    box-shadow: 0 0 0 0.22rem rgba(34, 211, 238, 0.14) !important;
+}
+
+.alert-success {
+    color: #dafaf0;
+    background: rgba(52, 211, 153, 0.12);
+    border-color: rgba(52, 211, 153, 0.22);
+}
+
+.alert-danger,
+.modern-alert.alert-danger {
+    color: #ffdbe2;
+    background: rgba(251, 113, 133, 0.12);
+    border-color: rgba(251, 113, 133, 0.24);
+}
+
+.alert-warning,
+.modern-alert.alert-warning {
+    color: #fff1c7;
+    background: rgba(251, 191, 36, 0.12);
+    border-color: rgba(251, 191, 36, 0.24);
+}
+
+.table,
+.table * {
+    color: var(--kmc-text-primary);
+}
+
+.table thead th {
+    color: #d1dbf9;
+    border-bottom-color: rgba(124, 92, 252, 0.24);
+}
+
+.table td,
+.table th {
+    border-color: rgba(95, 117, 167, 0.22);
+    background: transparent !important;
+}
+
+.reveal-on-scroll {
+    animation: revealLift .8s ease both;
+}
+
+@keyframes revealLift {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-showcase,
+.role-command-card,
+.city-card,
+.showcase-stat,
+.dashboard-stat-card,
+.page-hero-stat,
+.role-cta-seal,
+.event-date-tile,
+.live-indicator,
+.command-live {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.page-hero-stat,
+.live-indicator,
+.command-live,
+.role-cta-seal {
+    border: 1px solid rgba(124, 92, 252, 0.18);
+    background: rgba(17, 28, 55, 0.82) !important;
+}
+
+.event-capacity-bar {
+    background: rgba(255,255,255,0.07) !important;
+}
+
+.event-capacity-bar span {
+    background: linear-gradient(90deg, var(--kmc-purple), var(--kmc-cyan)) !important;
+}
+
+.ticket-tier-card,
+.partner-ticket-tier-card,
+.ticket-card,
+.tier-card {
+    border: 1px solid rgba(124, 92, 252, 0.18) !important;
+    background: linear-gradient(180deg, rgba(16, 26, 51, 0.9), rgba(10, 18, 36, 0.95)) !important;
+}
+
+.order-summary-card,
+.checkout-summary-card {
+    border-color: rgba(34, 211, 238, 0.22) !important;
+}
+
+.modal-content {
+    color: var(--kmc-text-primary);
+    background: linear-gradient(180deg, rgba(16, 26, 51, 0.96), rgba(10, 18, 35, 0.98));
+    border: 1px solid rgba(124, 92, 252, 0.18);
+}
+
+@media (max-width: 991.98px) {
+    .hero-visual-grid,
+    .about-hero-layout,
+    .discovery-strip {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-visual-grid .hero-visual-card:first-child {
+        grid-row: auto;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .discovery-visual-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .discovery-visual-grid .discovery-visual-card:first-child {
+        grid-column: auto;
+    }
+
+    .hero-visual-card,
+    .about-visual-card,
+    .discovery-visual-card {
+        min-height: 170px;
+    }
+}
+
+/* Readability fix for the live matching-event and ticket-availability counters. */
+body.kmc-dark-theme .page-hero-stat strong {
+    color: #10172b !important;
+    -webkit-text-fill-color: #10172b !important;
+    text-fill-color: #10172b !important;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.28) !important;
+}

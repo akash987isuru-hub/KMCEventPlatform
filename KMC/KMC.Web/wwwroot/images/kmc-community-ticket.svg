@@ -1,0 +1,37 @@
+<svg width="900" height="600" viewBox="0 0 900 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="900" y2="600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#091021"/>
+      <stop offset="1" stop-color="#111B36"/>
+    </linearGradient>
+    <linearGradient id="card" x1="136" y1="110" x2="762" y2="494" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#182850"/>
+      <stop offset="1" stop-color="#0B142C"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="600" rx="32" fill="url(#bg)"/>
+  <rect x="136" y="110" width="628" height="388" rx="28" fill="url(#card)" stroke="#2F4E81" stroke-width="2"/>
+  <circle cx="216" cy="160" r="60" fill="#7C5CFC" fill-opacity="0.18"/>
+  <circle cx="668" cy="160" r="72" fill="#22D3EE" fill-opacity="0.18"/>
+  <rect x="188" y="156" width="220" height="20" rx="10" fill="#F8FAFC" fill-opacity="0.95"/>
+  <rect x="188" y="194" width="152" height="12" rx="6" fill="#95A6D9" fill-opacity="0.8"/>
+  <rect x="188" y="244" width="254" height="108" rx="22" fill="#0C1731" stroke="#29477B"/>
+  <rect x="204" y="262" width="114" height="14" rx="7" fill="#22D3EE"/>
+  <rect x="204" y="294" width="206" height="10" rx="5" fill="#95A6D9" fill-opacity="0.72"/>
+  <rect x="204" y="320" width="166" height="10" rx="5" fill="#95A6D9" fill-opacity="0.55"/>
+  <path d="M534 210H700V246C684 246 672 258 672 273C672 288 684 300 700 300V430H534V394C550 394 562 382 562 367C562 352 550 340 534 340V210Z" fill="#0E1731" stroke="#2B4980" stroke-width="2"/>
+  <circle cx="534" cy="273" r="8" fill="#091021"/>
+  <circle cx="534" cy="367" r="8" fill="#091021"/>
+  <rect x="564" y="236" width="92" height="12" rx="6" fill="#FBBF24"/>
+  <rect x="564" y="264" width="112" height="12" rx="6" fill="#F8FAFC" fill-opacity="0.92"/>
+  <rect x="564" y="316" width="88" height="12" rx="6" fill="#34D399"/>
+  <rect x="564" y="344" width="94" height="12" rx="6" fill="#7C5CFC"/>
+  <g fill="#C6D1F2" fill-opacity="0.36">
+    <circle cx="246" cy="430" r="26"/>
+    <circle cx="306" cy="430" r="26"/>
+    <circle cx="366" cy="430" r="26"/>
+    <circle cx="426" cy="430" r="26"/>
+  </g>
+  <text x="188" y="546" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Trusted by organizers, ready for every public user</text>
+  <text x="188" y="580" fill="#95A6D9" font-family="Segoe UI, Arial, sans-serif" font-size="22">A colorful dark experience with connected city events and secure ticketing</text>
+</svg>
